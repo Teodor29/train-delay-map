@@ -1,0 +1,20 @@
+name: kmom-complete
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  if_merged:
+    if: startsWith(github.head_ref, 'kmom') && github.event.pull_request.merged
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - run: |
+        curl -H 'Content-Type: application/json' \
+          -d '{ "ref": "${{ github.head_ref }}", "student": "${{ github.repository_owner }}", "teacher": "${{ github.triggering_actor }}"}' \
+          -X POST \
+          https://canvas-gateway.emilfolino.se
