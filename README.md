@@ -1,3 +1,3 @@
-# webapp course repo
+# webapp project repo
 
-Course material for the course Webbapplikationer för mobila enheter given at Blekinge Institute of Technology.
+Project starter repo for the course Webbapplikationer för mobila enheter given at Blekinge Institute of Technology.
