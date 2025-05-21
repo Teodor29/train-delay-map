@@ -1,3 +1,5 @@
+/* global L */
+
 import { baseURL } from "../utils.js";
 
 import getCoordinates from "../models/nominatim.js";
@@ -7,7 +9,7 @@ export default class Map extends HTMLElement {
         super();
 
         this.adress = "Norra Kungsgatan 1, Karlskrona";
-        this.stations
+        this.stations;
         this.map = null;
     }
 
@@ -23,7 +25,6 @@ export default class Map extends HTMLElement {
     }
 
     async renderMap() {
-
         const initMap = (lat, lon, zoom) => {
             this.map = L.map("map").setView([lat, lon], zoom);
 
