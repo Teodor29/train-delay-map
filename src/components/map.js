@@ -8,17 +8,33 @@ export default class Map extends HTMLElement {
     constructor() {
         super();
 
-        this.adress = "Norra Kungsgatan 1, Karlskrona";
-        this.stations;
+        this.stations = {};
         this.map = null;
     }
 
     async connectedCallback() {
-        const response = await fetch(`${baseURL}/delayed`);
-        const result = await response.json();
+        let response = await fetch(`${baseURL}/stations`);
+        let result = await response.json();
 
-        this.stations = result.data;
-        console.log(this.stations);
+        let stationsData = result.data;
+
+        response = await fetch(`${baseURL}/delayed`);
+        result = await response.json();
+
+        let delayedData = result.data;
+
+        this.stations = stationsData.map((station) => {
+            let delays = delayedData.find(
+                delay => delay.LocationSignature === station.LocationSignature
+            );
+            if (delays) {
+                station.delay = delays;
+            } else {
+                station.delay = null;
+            }
+            return station;
+        });
+
         this.innerHTML = `<div id="map" class="map"></div>`;
 
         this.renderMap();
@@ -57,16 +73,35 @@ export default class Map extends HTMLElement {
     }
 
     async renderMarkers() {
-        const results = await getCoordinates(this.adress);
+        const trainIcon = L.divIcon({
+            className: "train-marker",
+            html: `<div>
+                        <img src="assets/img/train.svg" alt="Train" />
+                   </div>`,
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32],
+        });
 
-        if (results.length > 0) {
-            L.marker([
-                parseFloat(results[0].lat),
-                parseFloat(results[0].lon),
-            ]).addTo(this.map);
-        } else {
-            console.error("No address provided");
-        }
+        this.stations.forEach((station) => {
+            const pointString = station.Geometry.WGS84;
+            const cordString = pointString
+                .replace("POINT (", "")
+                .replace(")", "")
+                .split(" ");
+            L.marker([parseFloat(cordString[1]), parseFloat(cordString[0])], {
+                icon: trainIcon,
+            })
+                .bindPopup(
+                    `<div class="popup">
+                        <h3>${station.AdvertisedLocationName}</h3>
+                        <span>Delay: ${
+                            station.delay?.ActivityId ?? "inga förseningar"
+                        }</span>
+                    </div>`
+                )
+                .openPopup()
+                .addTo(this.map);
+        });
     }
 
     renderLocation() {
