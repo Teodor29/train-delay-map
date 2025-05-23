@@ -18,16 +18,17 @@
     "license": "ISC",
     "devDependencies": {
         "@eslint/js": "^9.18.0",
-        "eslint": "^9.18.0",
+        "eslint": "^9.25.1",
         "globals": "^15.14.0",
         "htmlhint": "^1.1.4",
         "http-server": "^14.1.1",
         "postcss": "^8.5.3",
-        "stylelint": "^16.18.0",
+        "stylelint": "^16.19.1",
         "stylelint-config-sass-guidelines": "^12.1.0",
         "stylelint-config-standard": "^37.0.0"
     },
     "dependencies": {
-        "live-server": "^1.2.2"
+        "live-server": "^1.2.2",
+        "sass": "^1.86.3"
     }
 }
