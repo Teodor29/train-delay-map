@@ -9,7 +9,9 @@ export default class Map extends HTMLElement {
         super();
 
         this.stations = {};
+        this.delayedTrains = [];
         this.map = null;
+        this.markers = [];
     }
 
     async connectedCallback() {
@@ -25,7 +27,7 @@ export default class Map extends HTMLElement {
 
         this.stations = stationsData.map((station) => {
             let delays = delayedData.find(
-                delay => delay.LocationSignature === station.LocationSignature
+                (delay) => delay.LocationSignature === station.LocationSignature
             );
             if (delays) {
                 station.delay = delays;
@@ -33,6 +35,16 @@ export default class Map extends HTMLElement {
                 station.delay = null;
             }
             return station;
+        });
+
+        console.log("Stations:", this.stations);
+
+        const socket = io("https://trafik.emilfolino.se");
+
+        socket.on("position", (data) => {
+            if (data) {
+                this.renderDelayedTrain(data);
+            }
         });
 
         this.innerHTML = `<div id="map" class="map"></div>`;
@@ -49,6 +61,8 @@ export default class Map extends HTMLElement {
                 attribution:
                     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             }).addTo(this.map);
+
+            this.delayedMarkersLayer = L.layerGroup().addTo(this.map);
 
             this.renderMarkers();
             this.renderLocation();
@@ -72,9 +86,37 @@ export default class Map extends HTMLElement {
         }
     }
 
+    async renderDelayedTrain(data) {
+        this.delayedMarkersLayer.clearLayers();
+
+        this.delayedTrains = this.delayedTrains.filter(
+            (train) => train.train !== data.train
+        );
+
+        this.delayedTrains.push(data);
+
+        this.delayedTrains.forEach((train) => {
+            L.marker([train.position[0], train.position[1]], {
+                color: "red",
+            })
+                .on("click", () => {
+                    const popup = document.getElementById("popup-div");
+                    popup.innerHTML = `
+                    <button class="close" id="close-popup">&times;</button>
+                    <h3>Tåg nr: ${train.train}</h3>
+                    <span>Försenad</span>
+                `;
+                    popup.style.display = "block";
+                    document.getElementById("close-popup").onclick = () => {
+                        popup.style.display = "none";
+                    };
+                })
+                .addTo(this.delayedMarkersLayer);
+        });
+    }
+
     async renderMarkers() {
         const trainIcon = L.divIcon({
-            className: "train-marker",
             html: `<div>
                         <img src="assets/img/train.svg" alt="Train" />
                    </div>`,
@@ -83,23 +125,50 @@ export default class Map extends HTMLElement {
         });
 
         this.stations.forEach((station) => {
+            if (station.delay) {
+                trainIcon.options.className = "train-marker delayed";
+            } else {
+                trainIcon.options.className = "train-marker";
+            }
+
             const pointString = station.Geometry.WGS84;
-            const cordString = pointString
+            const coords = pointString
                 .replace("POINT (", "")
                 .replace(")", "")
                 .split(" ");
-            L.marker([parseFloat(cordString[1]), parseFloat(cordString[0])], {
+            L.marker([parseFloat(coords[1]), parseFloat(coords[0])], {
                 icon: trainIcon,
             })
-                .bindPopup(
-                    `<div class="popup">
+                .on("click", () => {
+                    const popup = document.getElementById("popup-div");
+                    let delayMessage = "Ingen Försening";
+                    let estimatedTime = "";
+
+                    if (station.delay) {
+                        let advertised = new Date(
+                            station.delay.AdvertisedTimeAtLocation
+                        );
+                        let estimated = new Date(
+                            station.delay.EstimatedTimeAtLocation
+                        );
+                        let delay = (estimated - advertised) / 60000;
+                        delayMessage = `Försenad: ${delay} minuter`;
+                        estimatedTime = `Förväntad ankomst: ${estimated.toLocaleTimeString(
+                            "sv-SE"
+                        )}`;
+                    }
+
+                    popup.innerHTML = `
+                        <button class="close" id="close-popup">&times;</button>
                         <h3>${station.AdvertisedLocationName}</h3>
-                        <span>Delay: ${
-                            station.delay?.ActivityId ?? "inga förseningar"
-                        }</span>
-                    </div>`
-                )
-                .openPopup()
+                        <span>${delayMessage}</span>
+                        <p>${estimatedTime}</p>
+                    `;
+                    popup.style.display = "block";
+                    document.getElementById("close-popup").onclick = () => {
+                        popup.style.display = "none";
+                    };
+                })
                 .addTo(this.map);
         });
     }

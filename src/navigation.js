@@ -17,12 +17,15 @@ export default class Navigation extends HTMLElement {
             if (
                 path !== "2" 
             ) {
-                navigationLinks += `<a href='#${path}'>${routes[path].name}</a>`;
+                navigationLinks += `<a href='#${path}'>
+                <img src="assets/img/${routes[path].icon}.svg" alt="icon" />
+                ${routes[path].name}
+                </a>`;
             }
         }
 
         this.innerHTML = `
-        <nav>${navigationLinks}</nav>
+        <nav class="nav-links">${navigationLinks}</nav>
         `;
     }
 }

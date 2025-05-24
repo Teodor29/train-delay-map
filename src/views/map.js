@@ -6,6 +6,7 @@ export default class MapView extends HTMLElement {
                              </header>
                              <main class="main">
                                 <map-display></map-display>
+                                <div class="popup-div" id="popup-div"></div>
                              </main>
                              `;
     }
