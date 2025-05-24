@@ -8,10 +8,12 @@ export default class Router extends HTMLElement {
             "": {
                 view: "<map-view></map-view>",
                 name: "Map",
+                icon: "map",
             },
             "saved": {
                 view: "<saved-view></saved-view>",
                 name: "Saved",
+                icon: "saved",
             },
         };
     }

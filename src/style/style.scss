@@ -3,27 +3,23 @@
 $font-family: "Inter", sans-serif;
 $font-weight: 500;
 
-$light-grey: #d8d8d8;
-$dark-grey: #616161;
 $primary-text-color: #f5f5f5;
 $secondary-text-color: #ccc;
 $black: #000;
 $white: #fff;
 $border-grey: #808080;
-$accent-color: #1684f0;
-$accent-color2: #377abd;
-$accent-color3: #43678a;
-$accent-color4: #37434f;
-$accent-color5: #464b4f;
-$accent-color6: rgb(46 53 58 / 16%);
+$accent-color: #00363e;
+$accent-color2: #496276;
+$accent-color3: #58B9CA;
+$accent-color-light: #9fefff;
 
-$error-color: rgb(201 2 2);
+$red-color: #B20D0D;
+$error-color: rgb(230, 87, 87);
 $link-color: $accent-color2;
 
-$bg-color: #181a1b;
-$bg-color2: #464b4f;
-$bg-color3: #323232;
-$bg-color4: #434343;
+$bg-color: #131314;
+$bg-color2: #1a2122;
+$bg-color3: #303030;
 
 * {
     margin: 0;
@@ -122,16 +118,26 @@ router-outlet > * {
     flex-direction: column;
 }
 
-navigation-outlet a {
+.nav-links {
+    gap: 25%;
+}
+
+.nav-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 0.5rem;
-    color: $white;
-    font-weight: 600;
+    color: $secondary-text-color;
     text-decoration: none;
+}
+
+.nav-links img {
+    width: 1.5rem;
 }
 
 navigation-outlet {
     z-index: 1;
-    background-color: $accent-color5;
+    background-color: $bg-color2;
     padding: 0.5rem 0;
 
     a:hover {
@@ -162,11 +168,10 @@ button,
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    background-color: $accent-color3;
+    background-color: $accent-color;
 
     &:hover {
         cursor: pointer;
-        background-color: $accent-color4;
     }
 }
 
@@ -187,20 +192,18 @@ button,
 }
 
 .slide-in {
-    animation: move-from-right 0.4s ease both;
+    animation: move-from-bottom 0.4s ease both;
 }
 
 .slide-out {
-    animation: move-to-right 0.4s ease both;
+    animation: move-to-bottom 0.4s ease both;
 }
 
 .map {
     position: fixed;
     left: 0;
     height: 100vh;
-    width: 100vw;
-    min-height: 100vh;
-    min-width: 100vw;
+    width: 100%;
     z-index: 0;
 }
 
@@ -209,8 +212,8 @@ button,
         background: $bg-color2;
         border: 2px solid $primary-text-color;
         border-radius: 40%;
-        width: 28px;
-        height: 28px;
+        width: 1.5rem;
+        height: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -218,17 +221,47 @@ button,
     }
 
     img {
-        width: 20px;
-        height: 20px;
+        width: 1.125em;
+        height: 1.125rem;
     }
+}
+
+.delayed {
+    div {
+        background: $red-color;
+    }
+
 }
 
 .leaflet-layer,
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out,
 .leaflet-control-attribution {
-  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
 
-@media (width <= 600px) {
+.popup-div {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 800px;
+    min-height: 150px;
+    background: $bg-color;
+    color: $primary-text-color;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem;
+    z-index: 2;
+    display: none;
+}
+
+.popup-div .close {
+    background-color: $bg-color3;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 50%;
+    float: right;
+    font-size: 1.6rem;
 }
