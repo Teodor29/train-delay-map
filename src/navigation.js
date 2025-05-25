@@ -15,7 +15,8 @@ export default class Navigation extends HTMLElement {
 
         for (let path in routes) {
             if (
-                path !== "2" 
+                path !== "login" &&
+                path !== "register"
             ) {
                 navigationLinks += `<a href='#${path}'>
                 <img src="assets/img/${routes[path].icon}.svg" alt="icon" />

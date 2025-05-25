@@ -5,17 +5,17 @@ $font-weight: 500;
 
 $primary-text-color: #f5f5f5;
 $secondary-text-color: #ccc;
+$accent-text-color: #9fefff;
 $black: #000;
 $white: #fff;
 $border-grey: #808080;
 $accent-color: #00363e;
 $accent-color2: #496276;
-$accent-color3: #58B9CA;
-$accent-color-light: #9fefff;
+$accent-color3: #58b9ca;
 
-$red-color: #B20D0D;
+$red-color: #b20d0d;
 $error-color: rgb(230, 87, 87);
-$link-color: $accent-color2;
+$link-color: $accent-text-color;
 
 $bg-color: #131314;
 $bg-color2: #1a2122;
@@ -52,7 +52,7 @@ a {
 }
 
 h1 {
-    padding: 0.5rem 0;
+    padding-bottom: 0.5rem;
 }
 
 h3 {
@@ -69,6 +69,29 @@ ul {
     padding-bottom: 0.5rem;
 }
 
+button,
+.button {
+    color: $primary-text-color;
+    background-color: $accent-color;
+    border: 0;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    img {
+        width: 1.5rem;
+        height: 1.5rem;
+        vertical-align: middle;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: $accent-color2;
+    }
+}
+
 label,
 input,
 textarea,
@@ -80,11 +103,20 @@ select {
 input,
 textarea,
 select {
+    background-color: $bg-color2;
+    color: $primary-text-color;
     margin-bottom: 1rem;
     padding: 1rem;
     border: $border-grey 1px solid;
     border-radius: 5px;
     width: 100%;
+}
+
+.login-form {
+    .button {
+        font-size: 1.125rem;
+        padding: 0.75rem 1.5rem;
+    }
 }
 
 form {
@@ -159,22 +191,6 @@ navigation-outlet {
     padding: 0.5rem;
 }
 
-button,
-.button {
-    border: 0;
-    color: $white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-color: $accent-color;
-
-    &:hover {
-        cursor: pointer;
-    }
-}
-
 .right {
     float: right;
 }
@@ -230,7 +246,6 @@ button,
     div {
         background: $red-color;
     }
-
 }
 
 .leaflet-layer,
@@ -256,8 +271,13 @@ button,
     display: none;
 }
 
+.popup-div p {
+    margin-bottom: 0.5rem;
+}
+
 .popup-div .close {
     background-color: $bg-color3;
+    color: $primary-text-color;
     width: 2rem;
     height: 2rem;
     padding: 0;

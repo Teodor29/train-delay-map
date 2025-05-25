@@ -26,11 +26,11 @@ body {
 }
 
 a {
-    color: #496276;
+    color: #9fefff;
 }
 
 h1 {
-    padding: 0.5rem 0;
+    padding-bottom: 0.5rem;
 }
 
 h3 {
@@ -47,6 +47,29 @@ ul {
     padding-bottom: 0.5rem;
 }
 
+button,
+.button {
+    color: #f5f5f5;
+    background-color: #00363e;
+    border: 0;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button img,
+.button img {
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+}
+button:hover,
+.button:hover {
+    cursor: pointer;
+    background-color: #496276;
+}
+
 label,
 input,
 textarea,
@@ -58,11 +81,18 @@ select {
 input,
 textarea,
 select {
+    background-color: #1a2122;
+    color: #f5f5f5;
     margin-bottom: 1rem;
     padding: 1rem;
     border: #808080 1px solid;
     border-radius: 5px;
     width: 100%;
+}
+
+.login-form .button {
+    font-size: 1.125rem;
+    padding: 0.75rem 1.5rem;
 }
 
 form {
@@ -134,22 +164,6 @@ navigation-outlet nav {
     padding: 0.5rem;
 }
 
-button,
-.button {
-    border: 0;
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-color: #00363e;
-}
-button:hover,
-.button:hover {
-    cursor: pointer;
-}
-
 .right {
     float: right;
 }
@@ -197,7 +211,7 @@ button:hover,
 }
 
 .delayed div {
-    background: #B20D0D;
+    background: #b20d0d;
 }
 
 .leaflet-layer,
@@ -223,8 +237,13 @@ button:hover,
     display: none;
 }
 
+.popup-div p {
+    margin-bottom: 0.5rem;
+}
+
 .popup-div .close {
     background-color: #303030;
+    color: #f5f5f5;
     width: 2rem;
     height: 2rem;
     padding: 0;
