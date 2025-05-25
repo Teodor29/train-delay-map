@@ -10,10 +10,18 @@ export default class Router extends HTMLElement {
                 name: "Map",
                 icon: "map",
             },
-            "saved": {
+            saved: {
                 view: "<saved-view></saved-view>",
                 name: "Saved",
                 icon: "saved",
+            },
+            login: {
+                view: "<login-form></login-form>",
+                name: "Logga in",
+            },
+            register: {
+                view: "<register-form></register-form>",
+                name: "Registrera",
             },
         };
     }
@@ -51,5 +59,12 @@ export default class Router extends HTMLElement {
                 </div>
             `;
         }
+
+        const navLink = document.getElementById("nav-link")
+
+        navLink.onclick = () => {
+            navLink.classList.toggle("active");
+        }
+
     }
 }

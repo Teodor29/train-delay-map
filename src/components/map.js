@@ -2,8 +2,6 @@
 
 import { baseURL } from "../utils.js";
 
-import getCoordinates from "../models/nominatim.js";
-
 export default class Map extends HTMLElement {
     constructor() {
         super();
@@ -78,11 +76,11 @@ export default class Map extends HTMLElement {
                     );
                 },
                 () => {
-                    initMap(59.2573124324539, 15.253606421268424, 6);
+                    initMap(59.274793160440225, 17.85712622996837, 10);
                 }
             );
         } else {
-            initMap(59.2573124324539, 15.253606421268424, 5);
+            initMap(59.274793160440225, 17.85712622996837, 10);
         }
     }
 
@@ -161,8 +159,12 @@ export default class Map extends HTMLElement {
                     popup.innerHTML = `
                         <button class="close" id="close-popup">&times;</button>
                         <h3>${station.AdvertisedLocationName}</h3>
-                        <span>${delayMessage}</span>
+                        <p>${delayMessage}</p>
                         <p>${estimatedTime}</p>
+                        <button id="save-station">
+                            <img src="assets/img/saved.svg" alt="Spara">
+                            Spara
+                        </button>
                     `;
                     popup.style.display = "block";
                     document.getElementById("close-popup").onclick = () => {
