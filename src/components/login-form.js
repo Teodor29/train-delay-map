@@ -9,12 +9,12 @@ export default class LoginForm extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
         <div class="container">
-            <form action="" id="login-form" class="login-form">
+            <form action="" id="login-form">
                 <label>E-post</label>
                 <input type="email" id="email-input" required="required">
                 <label>Lösenord</label>
                 <input type="password" id="password-input" required="required">
-                <input type="submit" class="button" value="Logga in">
+                <input type="submit" class="button btn-big" value="Logga in">
                 <a style="font-size: 1rem" href="#register">
                     Registrera
                 </a>

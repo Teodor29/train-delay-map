@@ -8,18 +8,23 @@ $secondary-text-color: #ccc;
 $accent-text-color: #9fefff;
 $black: #000;
 $white: #fff;
-$border-grey: #808080;
-$accent-color: #00363e;
-$accent-color2: #496276;
-$accent-color3: #58b9ca;
 
-$red-color: #b20d0d;
-$error-color: rgb(230, 87, 87);
-$link-color: $accent-text-color;
+$accent-light: #58b9ca;
+$accent: #496276;
+$accent-dark: #00363e;
+$accent-darker:rgb(0, 36, 41);
 
 $bg-color: #131314;
 $bg-color2: #1a2122;
 $bg-color3: #303030;
+
+$red-color: #b20d0d;
+$bg-red: rgb(114, 36, 36);
+$bg-red2: rgb(88, 28, 28);
+$error-color: rgb(230, 87, 87);
+$link-color: $accent-text-color;
+$border-color: $bg-color3;
+
 
 * {
     margin: 0;
@@ -51,28 +56,24 @@ a {
     color: $link-color;
 }
 
-h1 {
+h1,
+h2,
+h3,
+p,
+ul {
+    margin: 0;
     padding-bottom: 0.5rem;
-}
-
-h3 {
-    padding-bottom: 0.5rem;
-}
-
-p {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    padding: 0;
 }
 
 ul {
-    padding-bottom: 0.5rem;
+    list-style: none;
+    color: $primary-text-color;
 }
 
 button,
 .button {
     color: $primary-text-color;
-    background-color: $accent-color;
+    background-color: $accent-dark;
     border: 0;
     font-size: 1rem;
     padding: 0.5rem 1rem;
@@ -88,8 +89,22 @@ button,
 
     &:hover {
         cursor: pointer;
-        background-color: $accent-color2;
+        background-color: $accent-darker;
     }
+}
+
+.bg-red {
+    background-color: $bg-red;
+
+    &:hover {
+        background-color: $bg-red2;
+    }
+}
+
+.btn-big {
+    width: 100%;
+    font-size: 1.125rem;
+    padding: 0.75rem 1.5rem;
 }
 
 label,
@@ -107,16 +122,9 @@ select {
     color: $primary-text-color;
     margin-bottom: 1rem;
     padding: 1rem;
-    border: $border-grey 1px solid;
+    border: $border-color 1px solid;
     border-radius: 5px;
     width: 100%;
-}
-
-.login-form {
-    .button {
-        font-size: 1.125rem;
-        padding: 0.75rem 1.5rem;
-    }
 }
 
 form {
@@ -125,14 +133,10 @@ form {
 
 .container {
     padding: 1rem;
-
-    div {
-        padding-bottom: 1rem;
-    }
 }
 
 .route-container {
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -170,7 +174,6 @@ router-outlet > * {
 navigation-outlet {
     z-index: 1;
     background-color: $bg-color2;
-    padding: 0.5rem 0;
 
     a:hover {
         text-decoration: underline;
@@ -225,6 +228,7 @@ navigation-outlet {
 
 .train-marker {
     div {
+        padding: 0;
         background: $bg-color2;
         border: 2px solid $primary-text-color;
         border-radius: 40%;
@@ -261,7 +265,7 @@ navigation-outlet {
     bottom: 0;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 800px;
+    max-width: 600px;
     min-height: 150px;
     background: $bg-color;
     color: $primary-text-color;
@@ -269,10 +273,6 @@ navigation-outlet {
     padding: 1rem;
     z-index: 2;
     display: none;
-}
-
-.popup-div p {
-    margin-bottom: 0.5rem;
 }
 
 .popup-div .close {
@@ -284,4 +284,30 @@ navigation-outlet {
     border-radius: 50%;
     float: right;
     font-size: 1.6rem;
+}
+
+.saved-stations {
+    padding-bottom: 1rem;
+}
+
+.station {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 2px solid $border-color;
+}
+
+.station-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h3 {
+        padding-bottom: 0;
+    }
+
+    span {
+        color: $secondary-text-color;
+    }
 }

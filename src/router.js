@@ -7,12 +7,12 @@ export default class Router extends HTMLElement {
         this.allRoutes = {
             "": {
                 view: "<map-view></map-view>",
-                name: "Map",
+                name: "Karta",
                 icon: "map",
             },
             saved: {
                 view: "<saved-view></saved-view>",
-                name: "Saved",
+                name: "Sparade",
                 icon: "saved",
             },
             login: {
@@ -58,12 +58,6 @@ export default class Router extends HTMLElement {
                     ${this.routes[this.currentRoute].view}
                 </div>
             `;
-        }
-
-        const navLink = document.getElementById("nav-link")
-
-        navLink.onclick = () => {
-            navLink.classList.toggle("active");
         }
 
     }
