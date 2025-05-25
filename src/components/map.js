@@ -170,6 +170,26 @@ export default class Map extends HTMLElement {
                     document.getElementById("close-popup").onclick = () => {
                         popup.style.display = "none";
                     };
+
+                    document.getElementById("save-station").onclick = () => {
+                        let savedStations =
+                            JSON.parse(localStorage.getItem("savedStations")) ||
+                            [];
+                        if (
+                            !savedStations.find(
+                                (s) =>
+                                    s.LocationSignature ===
+                                    station.LocationSignature
+                            )
+                        ) {
+                            savedStations.push(station);
+                            localStorage.setItem(
+                                "savedStations",
+                                JSON.stringify(savedStations)
+                            );
+                            console.log("savedStations", savedStations);
+                        }
+                    };
                 })
                 .addTo(this.map);
         });

@@ -14,7 +14,7 @@ export default class RegisterForm extends HTMLElement {
                     <input type="email" id="email-input" required="required">
                     <label>Lösenord</label>
                     <input type="password" id="password-input" required="required">
-                    <input type="submit" class="button" value="Registrera">
+                    <input type="submit" class="button btn-big" value="Registrera">
                     <a style="font-size: 1rem" href="#login">
                         Logga in
                     </a>
