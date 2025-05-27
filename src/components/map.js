@@ -10,6 +10,8 @@ export default class Map extends HTMLElement {
         this.delayedTrains = [];
         this.map = null;
         this.markers = [];
+        this.circle = null;
+        this.delay = null;
     }
 
     async connectedCallback() {
@@ -34,8 +36,6 @@ export default class Map extends HTMLElement {
             }
             return station;
         });
-
-        console.log("Stations:", this.stations);
 
         const socket = io("https://trafik.emilfolino.se");
 
@@ -94,10 +94,14 @@ export default class Map extends HTMLElement {
         this.delayedTrains.push(data);
 
         this.delayedTrains.forEach((train) => {
-            L.marker([train.position[0], train.position[1]], {
+            const lat = train.position[0];
+            const lon = train.position[1];
+            L.marker([lat, lon], {
                 color: "red",
             })
                 .on("click", () => {
+                    this.map.setView([lat, lon]);
+
                     const popup = document.getElementById("popup-div");
                     popup.innerHTML = `
                     <button class="close" id="close-popup">&times;</button>
@@ -134,62 +138,51 @@ export default class Map extends HTMLElement {
                 .replace("POINT (", "")
                 .replace(")", "")
                 .split(" ");
-            L.marker([parseFloat(coords[1]), parseFloat(coords[0])], {
+            const lat = parseFloat(coords[1]);
+            const lon = parseFloat(coords[0]);
+
+            L.marker([lat, lon], {
                 icon: trainIcon,
             })
                 .on("click", () => {
+                    this.map.setView([lat, lon]);
+
                     const popup = document.getElementById("popup-div");
-                    let delayMessage = "Ingen Försening";
-                    let estimatedTime = "";
+                    popup.innerHTML = this.createStationPopupContent(station);
 
                     if (station.delay) {
-                        let advertised = new Date(
-                            station.delay.AdvertisedTimeAtLocation
-                        );
-                        let estimated = new Date(
-                            station.delay.EstimatedTimeAtLocation
-                        );
-                        let delay = (estimated - advertised) / 60000;
-                        delayMessage = `Försenad: ${delay} minuter`;
-                        estimatedTime = `Förväntad ankomst: ${estimated.toLocaleTimeString(
-                            "sv-SE"
-                        )}`;
+                        const radius = (100 * this.delay) / 2 - 100;
+                        if (this.circle) {
+                            this.map.removeLayer(this.circle);
+                        }
+                        this.circle = L.circle([lat, lon], {
+                            color: "green",
+                            fillColor: "lightgreen",
+                            fillOpacity: 0.2,
+                            radius: radius,
+                        }).addTo(this.map);
                     }
 
-                    popup.innerHTML = `
-                        <button class="close" id="close-popup">&times;</button>
-                        <h3>${station.AdvertisedLocationName}</h3>
-                        <p>${delayMessage}</p>
-                        <p>${estimatedTime}</p>
-                        <button id="save-station">
-                            <img src="assets/img/saved.svg" alt="Spara">
-                            Spara
-                        </button>
-                    `;
                     popup.style.display = "block";
                     document.getElementById("close-popup").onclick = () => {
                         popup.style.display = "none";
-                    };
-
-                    document.getElementById("save-station").onclick = () => {
-                        let savedStations =
-                            JSON.parse(localStorage.getItem("savedStations")) ||
-                            [];
-                        if (
-                            !savedStations.find(
-                                (s) =>
-                                    s.LocationSignature ===
-                                    station.LocationSignature
-                            )
-                        ) {
-                            savedStations.push(station);
-                            localStorage.setItem(
-                                "savedStations",
-                                JSON.stringify(savedStations)
-                            );
-                            console.log("savedStations", savedStations);
+                        if (this.circle) {
+                            this.map.removeLayer(this.circle);
                         }
                     };
+
+                    const saveBtn = document.getElementById("save-station");
+                    if (saveBtn) {
+                        saveBtn.onclick = () => {
+                            this.addStation(station);
+                            saveBtn.outerHTML = `
+                                <a href="#saved" class="button">
+                                    <img src="assets/img/saved-check.svg" alt="Saved">
+                                    Sparad
+                                </a>
+                            `;
+                        };
+                    }
                 })
                 .addTo(this.map);
         });
@@ -211,5 +204,94 @@ export default class Map extends HTMLElement {
                 ).addTo(this.map);
             });
         }
+    }
+
+    addStation(station) {
+        let savedStations =
+            JSON.parse(localStorage.getItem("savedStations")) || [];
+        if (
+            !savedStations.find(
+                (s) => s.LocationSignature === station.LocationSignature
+            )
+        ) {
+            savedStations.push(station);
+            localStorage.setItem(
+                "savedStations",
+                JSON.stringify(savedStations)
+            );
+        }
+    }
+
+    createStationPopupContent(station) {
+        let delayMessage = "Ingen Försening";
+        let estimatedTime = "";
+        let extraMessage = "";
+        let button = `<button id="save-station">
+                <img src="assets/img/saved.svg" alt="Spara">
+                Spara
+            </button>`;
+        let savedStations =
+            JSON.parse(localStorage.getItem("savedStations")) || [];
+
+        if (
+            savedStations.find(
+                (s) =>
+                    s.AdvertisedLocationName === station.AdvertisedLocationName
+            )
+        ) {
+            button = `<a href="#saved" class="button">
+                        <img src="assets/img/saved-check.svg" alt="Ta bort">
+                        sparad
+                    </a>`;
+        }
+
+        if (station.delay) {
+            let advertised = new Date(station.delay.AdvertisedTimeAtLocation);
+            let estimated = new Date(station.delay.EstimatedTimeAtLocation);
+            this.delay = Math.round((estimated - advertised) / 60000);
+
+            if (this.delay > 5) {
+                let safeTimeDate = new Date(
+                    estimated.getTime() - (this.delay / 2 - 1) * 60000
+                );
+                let safeTime = safeTimeDate.toLocaleTimeString("sv-SE", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                });
+
+                console.log("advertised", advertised);
+                console.log("estimated", estimated);
+                console.log("delay", this.delay);
+                console.log("safeTimeDate", safeTimeDate);
+                console.log("safeTime", safeTime);
+                console.log(this.delay / 2 - 1);
+
+                extraMessage = `
+                    <h4>Utnyttja tiden</h4>
+                    <p>Håll dig innanför den gröna cirkeln och börja gå mot stationen senast ${safeTime} för att hinna till tåget</p>
+                `;
+            }
+
+            delayMessage = `Försenad: ${this.delay} minuter`;
+            estimatedTime = `${estimated.toLocaleTimeString("sv-SE", {
+                hour: "2-digit",
+                minute: "2-digit",
+            })}`;
+        }
+
+        return `
+            <button class="close" id="close-popup">&times;</button>
+            <div>
+                <h2>${station.AdvertisedLocationName}</h2>
+                <p>${delayMessage}</p>
+                <p>${estimatedTime}</p>
+            </div>
+            <div>
+                ${button}
+            </div>
+            <div>
+                ${extraMessage}
+            </div>
+        `;
     }
 }

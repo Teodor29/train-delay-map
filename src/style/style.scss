@@ -72,8 +72,10 @@ ul {
 
 button,
 .button {
+    display: inline-block;
     color: $primary-text-color;
     background-color: $accent-dark;
+    text-decoration: none;
     border: 0;
     font-size: 1rem;
     padding: 0.5rem 1rem;
@@ -133,6 +135,10 @@ form {
 
 .container {
     padding: 1rem;
+}
+
+.container h1 {
+    text-align: center;
 }
 
 .route-container {
@@ -227,6 +233,9 @@ navigation-outlet {
 }
 
 .train-marker {
+    margin: 0 !important;
+    margin-top: -0.75rem !important;
+    margin-left: -0.75rem !important;
     div {
         padding: 0;
         background: $bg-color2;
@@ -273,6 +282,23 @@ navigation-outlet {
     padding: 1rem;
     z-index: 2;
     display: none;
+
+    div {
+        margin-bottom: 1rem;
+    }
+
+    div:last-child {
+        margin-bottom: 0;
+    }
+
+    h2, h3 {
+        padding: 0;
+    }
+
+    p {
+        color: $secondary-text-color;
+        padding: 0;
+    }
 }
 
 .popup-div .close {

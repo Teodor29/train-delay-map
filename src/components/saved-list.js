@@ -37,7 +37,7 @@ export default class SavedList extends HTMLElement {
                             </div>
                         </div>
                         <div class="station-info">
-                            <h3>${station.AdvertisedLocationName}</h3>
+                            <h2>${station.AdvertisedLocationName}</h2>
                             <span>${delayMessage}</span>
                         </div>
                     </div>`;
