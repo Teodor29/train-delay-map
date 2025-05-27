@@ -6,36 +6,14 @@ export default class Map extends HTMLElement {
     constructor() {
         super();
 
-        this.stations = {};
         this.delayedTrains = [];
         this.map = null;
-        this.markers = [];
         this.circle = null;
         this.delay = null;
+        this.delayFromNow = null;
     }
 
     async connectedCallback() {
-        let response = await fetch(`${baseURL}/stations`);
-        let result = await response.json();
-
-        let stationsData = result.data;
-
-        response = await fetch(`${baseURL}/delayed`);
-        result = await response.json();
-
-        let delayedData = result.data;
-
-        this.stations = stationsData.map((station) => {
-            let delays = delayedData.find(
-                (delay) => delay.LocationSignature === station.LocationSignature
-            );
-            if (delays) {
-                station.delay = delays;
-            } else {
-                station.delay = null;
-            }
-            return station;
-        });
 
         const socket = io("https://trafik.emilfolino.se");
 
@@ -48,11 +26,26 @@ export default class Map extends HTMLElement {
         this.innerHTML = `<div id="map" class="map"></div>`;
 
         this.renderMap();
+
+        setInterval(() => {
+            this.renderMarkers();
+        }
+        , 60000);
     }
 
     async renderMap() {
         const initMap = (lat, lon, zoom) => {
             this.map = L.map("map").setView([lat, lon], zoom);
+
+            this.map.on("click", () => {
+                const popup = document.getElementById("popup-div");
+                if (popup) {
+                    popup.style.display = "none";
+                }
+                if (this.circle) {
+                    this.map.removeLayer(this.circle);
+                }
+            });
 
             L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 maxZoom: 19,
@@ -61,6 +54,7 @@ export default class Map extends HTMLElement {
             }).addTo(this.map);
 
             this.delayedMarkersLayer = L.layerGroup().addTo(this.map);
+            this.stationMarkersLayer = L.layerGroup().addTo(this.map);
 
             this.renderMarkers();
             this.renderLocation();
@@ -118,6 +112,30 @@ export default class Map extends HTMLElement {
     }
 
     async renderMarkers() {
+        this.stationMarkersLayer.clearLayers();
+
+        let response = await fetch(`${baseURL}/stations`);
+        let result = await response.json();
+
+        let stationsData = result.data;
+
+        response = await fetch(`${baseURL}/delayed`);
+        result = await response.json();
+
+        let delayedData = result.data;
+
+        let stations = stationsData.map((station) => {
+            let delays = delayedData.find(
+                (delay) => delay.LocationSignature === station.LocationSignature
+            );
+            if (delays) {
+                station.delay = delays;
+            } else {
+                station.delay = null;
+            }
+            return station;
+        });
+
         const trainIcon = L.divIcon({
             html: `<div>
                         <img src="assets/img/train.svg" alt="Train" />
@@ -126,7 +144,7 @@ export default class Map extends HTMLElement {
             popupAnchor: [0, -32],
         });
 
-        this.stations.forEach((station) => {
+        stations.forEach((station) => {
             if (station.delay) {
                 trainIcon.options.className = "train-marker delayed";
             } else {
@@ -141,17 +159,22 @@ export default class Map extends HTMLElement {
             const lat = parseFloat(coords[1]);
             const lon = parseFloat(coords[0]);
 
-            L.marker([lat, lon], {
+            const marker = L.marker([lat, lon], {
                 icon: trainIcon,
             })
                 .on("click", () => {
                     this.map.setView([lat, lon]);
 
+                    if (this.circle) {
+                        this.map.removeLayer(this.circle);
+                    }
+
                     const popup = document.getElementById("popup-div");
                     popup.innerHTML = this.createStationPopupContent(station);
 
                     if (station.delay) {
-                        const radius = (100 * this.delay) / 2 - 100;
+                        const radius = (100 * this.delayFromNow) / 2 - 100;
+                        console.log("radius", radius);
                         if (this.circle) {
                             this.map.removeLayer(this.circle);
                         }
@@ -183,8 +206,9 @@ export default class Map extends HTMLElement {
                             `;
                         };
                     }
-                })
-                .addTo(this.map);
+                });
+
+            this.stationMarkersLayer.addLayer(marker);
         });
     }
 
@@ -248,23 +272,18 @@ export default class Map extends HTMLElement {
         if (station.delay) {
             let advertised = new Date(station.delay.AdvertisedTimeAtLocation);
             let estimated = new Date(station.delay.EstimatedTimeAtLocation);
+            let current = new Date();
             this.delay = Math.round((estimated - advertised) / 60000);
+            this.delayFromNow = Math.round((estimated - current) / 60000);
 
-            if (this.delay > 5) {
+            if (this.delayFromNow > 5) {
                 let safeTimeDate = new Date(
-                    estimated.getTime() - (this.delay / 2 - 1) * 60000
+                    estimated.getTime() - (this.delayFromNow / 2 + 2) * 60000
                 );
                 let safeTime = safeTimeDate.toLocaleTimeString("sv-SE", {
                     hour: "2-digit",
                     minute: "2-digit",
                 });
-
-                console.log("advertised", advertised);
-                console.log("estimated", estimated);
-                console.log("delay", this.delay);
-                console.log("safeTimeDate", safeTimeDate);
-                console.log("safeTime", safeTime);
-                console.log(this.delay / 2 - 1);
 
                 extraMessage = `
                     <h4>Utnyttja tiden</h4>
