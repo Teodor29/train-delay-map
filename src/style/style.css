@@ -285,6 +285,10 @@ navigation-outlet nav {
     border-bottom: 2px solid #303030;
 }
 
+.station .train-marker {
+    margin: 0 !important;
+}
+
 .station-info {
     display: flex;
     flex-direction: column;

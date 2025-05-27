@@ -232,6 +232,8 @@ navigation-outlet {
     z-index: 0;
 }
 
+
+
 .train-marker {
     margin: 0 !important;
     margin-top: -0.75rem !important;
@@ -322,6 +324,10 @@ navigation-outlet {
     align-items: center;
     gap: 2rem;
     border-bottom: 2px solid $border-color;
+}
+
+.station .train-marker {
+    margin: 0 !important;
 }
 
 .station-info {
