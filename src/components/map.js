@@ -79,7 +79,11 @@ export default class Map extends HTMLElement {
     }
 
     async renderDelayedTrain(data) {
-        this.delayedMarkersLayer.clearLayers();
+        if (this.delayedMarkersLayer) {
+            this.delayedMarkersLayer.clearLayers();
+        } else {
+            window.location.reload();
+        }
 
         this.delayedTrains = this.delayedTrains.filter(
             (train) => train.train !== data.train
