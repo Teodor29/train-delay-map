@@ -1,5 +1,3 @@
-import { apiKey, baseURL } from "../utils.js";
-
 export default class SavedList extends HTMLElement {
     constructor() {
         super();
