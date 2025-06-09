@@ -1,6 +1,5 @@
-/* global L */
+/* global L, io */
 import { baseURL } from "../utils.js";
-import io from "socket.io-client";
 
 export default class Map extends HTMLElement {
     constructor() {
