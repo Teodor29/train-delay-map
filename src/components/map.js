@@ -19,7 +19,7 @@ export default class Map extends HTMLElement {
 
         socket.on("position", (data) => {
             if (data) {
-                this.renderDelayedTrain(data);
+                this.renderDelayedTrainMarkers(data);
             }
         });
 
@@ -28,7 +28,7 @@ export default class Map extends HTMLElement {
         this.renderMap();
 
         setInterval(() => {
-            this.renderMarkers();
+            this.renderStationMarkers();
         }
         , 60000);
     }
@@ -56,7 +56,7 @@ export default class Map extends HTMLElement {
             this.delayedMarkersLayer = L.layerGroup().addTo(this.map);
             this.stationMarkersLayer = L.layerGroup().addTo(this.map);
 
-            this.renderMarkers();
+            this.renderStationMarkers();
             this.renderLocation();
         };
 
@@ -78,7 +78,7 @@ export default class Map extends HTMLElement {
         }
     }
 
-    async renderDelayedTrain(data) {
+    async renderDelayedTrainMarkers(data) {
         if (this.delayedMarkersLayer) {
             this.delayedMarkersLayer.clearLayers();
         } else {
@@ -115,7 +115,7 @@ export default class Map extends HTMLElement {
         });
     }
 
-    async renderMarkers() {
+    async renderStationMarkers() {
         this.stationMarkersLayer.clearLayers();
 
         let response = await fetch(`${baseURL}/stations`);
