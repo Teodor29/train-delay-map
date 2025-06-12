@@ -1,14 +1,41 @@
-<!doctype html>
-<html lang="sv">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Trafik-Appen</title>
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+        <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+            crossorigin=""
+        />
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="
+                default-src 'self';
+                connect-src 'self' https://lager.emilfolino.se https://nominatim.openstreetmap.org ws://localhost:5500 data: https://upload.uploadcare.com https://lager-chat.emilfolino.se wss://lager-chat.emilfolino.se https://trafik.emilfolino.se wss://trafik.emilfolino.se;
+                script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+                style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                img-src 'self' https://tile.openstreetmap.org https://unpkg.com https://ucarecdn.com;
+            "
+        />
 
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <h1>Trafik-Appen</h1>
-    <p>Nu är vi igång!</p>
-</body>
+        <title>Lager-Components</title>
+
+        <link rel="stylesheet" href="src/style/style.css" />
+        <script type="module" src="src/main.js" defer></script>
+    </head>
+    <body>
+        <router-outlet></router-outlet>
+        <navigation-outlet></navigation-outlet>
+    </body>
 </html>
