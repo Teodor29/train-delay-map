@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - 'kmom*'
+      - "dev"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -33,12 +33,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Create utils.js
+        run: |
+          cat > src/utils.js << EOF
+          const baseURL = "${{ secrets.BASE_URL || 'https://trafik.emilfolino.se' }}";
+          const apiKey = "${{ secrets.API_KEY }}";
+          const authBaseURL = "${{ secrets.AUTH_BASE_URL || 'https://lager.emilfolino.se/v2' }}";
+
+          export { baseURL, apiKey, authBaseURL };
+          EOF
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './'
+          path: "./"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
