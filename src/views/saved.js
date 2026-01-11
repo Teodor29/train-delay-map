@@ -1,24 +1,24 @@
 import auth from "../models/auth.js";
 export default class SavedView extends HTMLElement {
-    // connect component
-    connectedCallback() {
-        let flashMessage = "";
+  // connect component
+  connectedCallback() {
+    let flashMessage = "";
 
-        if (auth.flash) {
-            flashMessage = auth.flash;
+    if (auth.flash) {
+      flashMessage = auth.flash;
 
-            auth.flash = "";
-        }
+      auth.flash = "";
+    }
 
-        let logout = "";
+    let logout = "";
 
-        if (sessionStorage.getItem("loggedIn")) {
-            logout = `<a href="#login" id="logout">Logga ut</a>`;
-        } else {
-            window.location.hash = "login";
-        }
+    if (sessionStorage.getItem("loggedIn")) {
+      logout = `<a href="#login" id="logout">Logga ut</a>`;
+    } else {
+      window.location.hash = "login";
+    }
 
-        this.innerHTML = `
+    this.innerHTML = `
             <header class="header">
                 <lager-title title="Home"></lager-title>
             </header>
@@ -31,19 +31,18 @@ export default class SavedView extends HTMLElement {
             </main>
         `;
 
-        document
-            .getElementById("logout")
-            .addEventListener("click", async () => {
-                auth.logout();
-                location.hash = "login";
-            });
+    document.getElementById("logout").addEventListener("click", async () => {
+      auth.logout();
+      location.hash = "login";
+    });
 
-        document.getElementById("clear-fav").addEventListener("click", () => {
-            if (confirm("Är du säker på att du vill ta bort alla sparade stationer?")) {
-                localStorage.removeItem("savedStations");
-                window.location.reload();
-            }
-        })
-
-    }
+    document.getElementById("clear-fav").addEventListener("click", () => {
+      if (
+        confirm("Är du säker på att du vill ta bort alla sparade stationer?")
+      ) {
+        localStorage.removeItem("savedStations");
+        window.location.reload();
+      }
+    });
+  }
 }

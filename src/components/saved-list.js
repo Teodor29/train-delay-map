@@ -1,34 +1,30 @@
 export default class SavedList extends HTMLElement {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.orders = [];
-    }
+    this.orders = [];
+  }
 
-    async connectedCallback() {
-        this.savedStations =
-            JSON.parse(localStorage.getItem("savedStations")) || [];
+  async connectedCallback() {
+    this.savedStations =
+      JSON.parse(localStorage.getItem("savedStations")) || [];
 
-        this.render();
-    }
+    this.render();
+  }
 
-    render() {
-        const list = this.savedStations
-            .map((station) => {
-                let delayMessage = "";
+  render() {
+    const list = this.savedStations
+      .map((station) => {
+        let delayMessage = "";
 
-                if (station.delay) {
-                    let advertised = new Date(
-                        station.delay.AdvertisedTimeAtLocation
-                    );
-                    let estimated = new Date(
-                        station.delay.EstimatedTimeAtLocation
-                    );
-                    let delay = (estimated - advertised) / 60000;
-                    delayMessage = `Försenad: ${delay} minuter`;
-                }
+        if (station.delay) {
+          let advertised = new Date(station.delay.AdvertisedTimeAtLocation);
+          let estimated = new Date(station.delay.EstimatedTimeAtLocation);
+          let delay = (estimated - advertised) / 60000;
+          delayMessage = `Försenad: ${delay} minuter`;
+        }
 
-                return `<div class="station">
+        return `<div class="station">
                         <div class="train-marker">
                             <div>
                                 <img src="assets/img/train.svg" alt="Train" />
@@ -39,13 +35,13 @@ export default class SavedList extends HTMLElement {
                             <span>${delayMessage}</span>
                         </div>
                     </div>`;
-            })
-            .join("");
+      })
+      .join("");
 
-        this.innerHTML = `
+    this.innerHTML = `
           <div class="saved-stations">
             ${list}
           </div>
         `;
-    }
+  }
 }
