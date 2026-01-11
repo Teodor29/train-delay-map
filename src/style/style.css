@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +16,7 @@ html {
 
 body {
   line-height: 1.4;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   padding-top: 0;
   height: 100%;
@@ -56,12 +57,14 @@ button,
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 button img,
 .button img {
   width: 1.5rem;
   height: 1.5rem;
   vertical-align: middle;
 }
+
 button:hover,
 .button:hover {
   cursor: pointer;
@@ -71,6 +74,7 @@ button:hover,
 .bg-red {
   background-color: rgb(114, 36, 36);
 }
+
 .bg-red:hover {
   background-color: rgb(88, 28, 28);
 }
@@ -153,9 +157,11 @@ navigation-outlet {
   z-index: 1;
   background-color: #1a2122;
 }
+
 navigation-outlet a:hover {
   text-decoration: underline;
 }
+
 navigation-outlet nav {
   padding-bottom: 1rem;
   display: flex;
@@ -184,6 +190,7 @@ navigation-outlet nav {
     transform: translateX(100%);
   }
 }
+
 .slide-in {
   animation: move-from-bottom 0.4s ease both;
 }
@@ -205,6 +212,7 @@ navigation-outlet nav {
   margin-top: -0.75rem !important;
   margin-left: -0.75rem !important;
 }
+
 .train-marker div {
   padding: 0;
   background: #1a2122;
@@ -217,6 +225,7 @@ navigation-outlet nav {
   justify-content: center;
   box-shadow: 0 0 5px #000;
 }
+
 .train-marker img {
   width: 1.125em;
   height: 1.125rem;
@@ -248,16 +257,20 @@ navigation-outlet nav {
   z-index: 2;
   display: none;
 }
+
 .popup-div div {
   margin-bottom: 1rem;
 }
+
 .popup-div div:last-child {
   margin-bottom: 0;
 }
+
 .popup-div h2,
 .popup-div h3 {
   padding: 0;
 }
+
 .popup-div p {
   color: #ccc;
   padding: 0;
@@ -295,11 +308,11 @@ navigation-outlet nav {
   flex-direction: column;
   justify-content: center;
 }
+
 .station-info h3 {
   padding-bottom: 0;
 }
+
 .station-info span {
   color: #ccc;
 }
-
-/*# sourceMappingURL=style.css.map */
