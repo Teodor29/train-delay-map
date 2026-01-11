@@ -33,7 +33,13 @@ cd train-delay-map
 ```
 npm install
 ```
-4. Start the development server:
+4. Set up configuration:
+```
+cp src/utils.example.js src/utils.js
+```
+Then edit `src/utils.js` and add your API key and configuration values.
+
+5. Start the development server:
 ```
 npm start
 ```
