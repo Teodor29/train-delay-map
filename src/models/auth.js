@@ -63,8 +63,6 @@ const auth = {
         return "not ok";
       }
 
-      const result = await response.json();
-
       return "ok";
     } catch (error) {
       console.error("Error: ", error);
