@@ -25,13 +25,13 @@ export default class Map extends HTMLElement {
 
     this.renderMap();
 
-    setInterval(() => {
-      this.renderStationMarkers();
+    setInterval(async () => {
+      await this.renderStationMarkers();
     }, 60000);
   }
 
   async renderMap() {
-    const initMap = (lat, lon, zoom) => {
+    const initMap = async (lat, lon, zoom) => {
       this.map = L.map("map").setView([lat, lon], zoom);
 
       this.map.on("click", () => {
@@ -53,7 +53,7 @@ export default class Map extends HTMLElement {
       this.delayedMarkersLayer = L.layerGroup().addTo(this.map);
       this.stationMarkersLayer = L.layerGroup().addTo(this.map);
 
-      this.renderStationMarkers();
+      await this.renderStationMarkers();
       this.renderLocation();
     };
 
