@@ -6,6 +6,7 @@
     "scripts": {
         "test": "echo \"Implement later\" && exit 0",
         "start": "live-server --port=8080 --watch=.",
+        "sass:watch": "sass --watch src/style/style.scss:src/style/style.css",
         "posttest": "npm run eslint && npm run stylelint && npm run htmlhint",
         "eslint": "eslint",
         "eslint:fix": "eslint --fix",
