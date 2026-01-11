@@ -23,11 +23,11 @@ To run the project locally:
 
 1. Clone the repository:
 ```
-git clone https://github.com/Teodor29/Teodor29.github.io
+git clone https://github.com/Teodor29/train-delay-map.git
 ```
 2. Navigate to the project folder:
 ```
-cd Teodor29.github.io
+cd train-delay-map
 ```
 3. Install dependencies:
 ```
