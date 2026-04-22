@@ -133,9 +133,6 @@ export default class Map extends HTMLElement {
     }
 
     if (!Array.isArray(stationsData) || !Array.isArray(delayedData)) {
-      if (retries > 0) {
-        setTimeout(() => this.renderStationMarkers(retries - 1), 3000);
-      }
       return;
     }
 
