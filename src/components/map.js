@@ -27,7 +27,7 @@ export default class Map extends HTMLElement {
 
     setInterval(async () => {
       await this.renderStationMarkers();
-    }, 60000);
+    }, 15000);
   }
 
   async renderMap() {
@@ -72,11 +72,11 @@ export default class Map extends HTMLElement {
   }
 
   async renderDelayedTrainMarkers(data) {
-    if (this.delayedMarkersLayer) {
-      this.delayedMarkersLayer.clearLayers();
-    } else {
-      window.location.reload();
+    if (!this.delayedMarkersLayer) {
+      return;
     }
+
+    this.delayedMarkersLayer.clearLayers();
 
     this.delayedTrains = this.delayedTrains.filter(
       (train) => train.train !== data.train
@@ -108,28 +108,44 @@ export default class Map extends HTMLElement {
     });
   }
 
+  async fetchWithTimeout(url, timeout = 3000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    try {
+      const response = await fetch(url, { signal: controller.signal });
+      const result = await response.json();
+      return result.data;
+    } finally {
+      clearTimeout(id);
+    }
+  }
+
   async renderStationMarkers() {
+    if (!this.stationMarkersLayer) return;
+
+    let stationsData, delayedData;
+
+    try {
+      stationsData = await this.fetchWithTimeout(`${baseURL}/stations`);
+      delayedData = await this.fetchWithTimeout(`${baseURL}/delayed`);
+    } catch {
+      return;
+    }
+
+    if (!Array.isArray(stationsData) || !Array.isArray(delayedData)) {
+      if (retries > 0) {
+        setTimeout(() => this.renderStationMarkers(retries - 1), 3000);
+      }
+      return;
+    }
+
     this.stationMarkersLayer.clearLayers();
 
-    let response = await fetch(`${baseURL}/stations`);
-    let result = await response.json();
-
-    let stationsData = result.data;
-
-    response = await fetch(`${baseURL}/delayed`);
-    result = await response.json();
-
-    let delayedData = result.data;
-
-    let stations = stationsData.map((station) => {
-      let delays = delayedData.find(
+    const stations = stationsData.map((station) => {
+      const delays = delayedData.find(
         (delay) => delay.LocationSignature === station.LocationSignature
       );
-      if (delays) {
-        station.delay = delays;
-      } else {
-        station.delay = null;
-      }
+      station.delay = delays || null;
       return station;
     });
 

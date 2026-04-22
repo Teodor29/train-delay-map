@@ -15,14 +15,7 @@ export default class Router extends HTMLElement {
         name: "Sparade",
         icon: "saved",
       },
-      login: {
-        view: "<login-form></login-form>",
-        name: "Logga in",
-      },
-      register: {
-        view: "<register-form></register-form>",
-        name: "Registrera",
-      },
+
     };
   }
 
