@@ -1,27 +1,26 @@
 export default class SavedList extends HTMLElement {
   constructor() {
-    super();
+    super()
 
-    this.orders = [];
+    this.orders = []
   }
 
   async connectedCallback() {
-    this.savedStations =
-      JSON.parse(localStorage.getItem("savedStations")) || [];
+    this.savedStations = JSON.parse(localStorage.getItem('savedStations')) || []
 
-    this.render();
+    this.render()
   }
 
   render() {
     const list = this.savedStations
       .map((station) => {
-        let delayMessage = "";
+        let delayMessage = ''
 
         if (station.delay) {
-          let advertised = new Date(station.delay.AdvertisedTimeAtLocation);
-          let estimated = new Date(station.delay.EstimatedTimeAtLocation);
-          let delay = (estimated - advertised) / 60000;
-          delayMessage = `Försenad: ${delay} minuter`;
+          let advertised = new Date(station.delay.AdvertisedTimeAtLocation)
+          let estimated = new Date(station.delay.EstimatedTimeAtLocation)
+          let delay = (estimated - advertised) / 60000
+          delayMessage = `Försenad: ${delay} minuter`
         }
 
         return `<div class="station">
@@ -34,14 +33,14 @@ export default class SavedList extends HTMLElement {
                             <h2>${station.AdvertisedLocationName}</h2>
                             <span>${delayMessage}</span>
                         </div>
-                    </div>`;
+                    </div>`
       })
-      .join("");
+      .join('')
 
     this.innerHTML = `
           <div class="saved-stations">
             ${list}
           </div>
-        `;
+        `
   }
 }

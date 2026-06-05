@@ -12,7 +12,8 @@
         "eslint:fix": "eslint --fix",
         "stylelint": "stylelint \"**/*.{css,scss}\"",
         "stylelint:fix": "stylelint --fix \"**/*.css\"",
-        "htmlhint": "htmlhint \"**/*.html\""
+        "htmlhint": "htmlhint \"**/*.html\"",
+        "format": "prettier --write \"src/**/*.{js,css,scss,html}\" \"*.html\""
     },
     "keywords": [],
     "author": "",
@@ -30,6 +31,7 @@
     },
     "dependencies": {
         "live-server": "^1.2.0",
+        "prettier": "^3.8.3",
         "sass": "^1.86.3",
         "socket.io-client": "^4.8.1"
     }

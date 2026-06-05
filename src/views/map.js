@@ -8,6 +8,6 @@ export default class MapView extends HTMLElement {
                                 <map-display></map-display>
                                 <div class="popup-div" id="popup-div"></div>
                              </main>
-                             `;
+                             `
   }
 }

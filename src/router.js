@@ -1,41 +1,40 @@
 export default class Router extends HTMLElement {
   constructor() {
-    super();
+    super()
 
-    this.currentRoute = "";
+    this.currentRoute = ''
 
     this.allRoutes = {
-      "": {
-        view: "<map-view></map-view>",
-        name: "Karta",
-        icon: "map",
+      '': {
+        view: '<map-view></map-view>',
+        name: 'Karta',
+        icon: 'map',
       },
       saved: {
-        view: "<saved-view></saved-view>",
-        name: "Sparade",
-        icon: "saved",
+        view: '<saved-view></saved-view>',
+        name: 'Sparade',
+        icon: 'saved',
       },
-
-    };
+    }
   }
 
   get routes() {
-    return this.allRoutes;
+    return this.allRoutes
   }
 
   // connect component
   connectedCallback() {
-    window.addEventListener("hashchange", () => {
-      this.resolveRoute();
-    });
+    window.addEventListener('hashchange', () => {
+      this.resolveRoute()
+    })
 
-    this.resolveRoute();
+    this.resolveRoute()
   }
 
   resolveRoute() {
-    this.currentRoute = location.hash.replace("#", "").split("/")[0];
+    this.currentRoute = location.hash.replace('#', '').split('/')[0]
 
-    this.render();
+    this.render()
   }
 
   render() {
@@ -43,14 +42,14 @@ export default class Router extends HTMLElement {
             <div class="route-container">
                 <not-found></not-found>
             </div>
-        `;
+        `
 
     if (this.routes[this.currentRoute]) {
       this.innerHTML = `
                 <div class="route-container">
                     ${this.routes[this.currentRoute].view}
                 </div>
-            `;
+            `
     }
   }
 }

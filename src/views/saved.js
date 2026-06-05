@@ -9,15 +9,15 @@ export default class SavedView extends HTMLElement {
                 <saved-list></saved-list>
                 <button class="btn-big bg-red" id="clear-fav">Rensa stationer</button>
             </main>
-        `;
+        `
 
-    document.getElementById("clear-fav").addEventListener("click", () => {
+    document.getElementById('clear-fav').addEventListener('click', () => {
       if (
-        confirm("Är du säker på att du vill ta bort alla sparade stationer?")
+        confirm('Är du säker på att du vill ta bort alla sparade stationer?')
       ) {
-        localStorage.removeItem("savedStations");
-        window.location.reload();
+        localStorage.removeItem('savedStations')
+        window.location.reload()
       }
-    });
+    })
   }
 }
