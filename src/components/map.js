@@ -181,19 +181,6 @@ export default class Map extends HTMLElement {
         const popup = document.getElementById('popup-div')
         popup.innerHTML = this.createStationPopupContent(station)
 
-        if (station.delay) {
-          const radius = (100 * this.delayFromNow) / 2 - 100
-          if (this.circle) {
-            this.map.removeLayer(this.circle)
-          }
-          this.circle = L.circle([lat, lon], {
-            color: 'green',
-            fillColor: 'lightgreen',
-            fillOpacity: 0.2,
-            radius: radius,
-          }).addTo(this.map)
-        }
-
         popup.style.display = 'block'
         document.getElementById('close-popup').onclick = () => {
           popup.style.display = 'none'
@@ -250,9 +237,7 @@ export default class Map extends HTMLElement {
   }
 
   createStationPopupContent(station) {
-    let delayMessage = 'Ingen Försening'
     let estimatedTime = ''
-    let extraMessage = ''
     let button = `<button id="save-station">
                 <img src="assets/img/saved.svg" alt="Spara">
                 Spara
@@ -273,26 +258,8 @@ export default class Map extends HTMLElement {
     if (station.delay) {
       let advertised = new Date(station.delay.AdvertisedTimeAtLocation)
       let estimated = new Date(station.delay.EstimatedTimeAtLocation)
-      let current = new Date()
       this.delay = Math.round((estimated - advertised) / 60000)
-      this.delayFromNow = Math.round((estimated - current) / 60000)
 
-      if (this.delayFromNow > 5) {
-        let safeTimeDate = new Date(
-          estimated.getTime() - (this.delayFromNow / 2 + 2) * 60000,
-        )
-        let safeTime = safeTimeDate.toLocaleTimeString('sv-SE', {
-          hour: '2-digit',
-          minute: '2-digit',
-        })
-
-        extraMessage = `
-                    <h4>Utnyttja tiden</h4>
-                    <p>Håll dig innanför den gröna cirkeln och börja gå mot stationen senast ${safeTime} för att hinna till tåget</p>
-                `
-      }
-
-      delayMessage = `Försenad: ${this.delay} minuter`
       estimatedTime = `${estimated.toLocaleTimeString('sv-SE', {
         hour: '2-digit',
         minute: '2-digit',
@@ -303,14 +270,11 @@ export default class Map extends HTMLElement {
             <button class="close" id="close-popup">&times;</button>
             <div>
                 <h2>${station.AdvertisedLocationName}</h2>
-                <p>${delayMessage}</p>
-                <p>${estimatedTime}</p>
+                <p>Försenad: ${this.delay} minuter</p>
+                <p>Beräknad ankomst: ${estimatedTime}</p>
             </div>
             <div>
                 ${button}
-            </div>
-            <div>
-                ${extraMessage}
             </div>
         `
   }

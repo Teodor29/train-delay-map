@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -34,7 +33,6 @@ h2,
 h3,
 p,
 ul {
-  margin: 0;
   padding-bottom: 0.5rem;
 }
 
@@ -56,24 +54,20 @@ button,
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 button img,
 .button img {
   width: 1.5rem;
   height: 1.5rem;
   vertical-align: middle;
 }
-
 button:hover,
 .button:hover {
-  cursor: pointer;
   background-color: rgb(0, 36, 41);
 }
 
 .bg-red {
   background-color: rgb(114, 36, 36);
 }
-
 .bg-red:hover {
   background-color: rgb(88, 28, 28);
 }
@@ -104,16 +98,8 @@ select {
   width: 100%;
 }
 
-form {
-  margin-top: 0;
-}
-
 .container {
   padding: 1rem;
-}
-
-.container h1 {
-  text-align: center;
 }
 
 .route-container {
@@ -145,7 +131,7 @@ router-outlet > * {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   color: #ccc;
   text-decoration: none;
 }
@@ -158,11 +144,9 @@ navigation-outlet {
   z-index: 1;
   background-color: #1a2122;
 }
-
 navigation-outlet a:hover {
   text-decoration: underline;
 }
-
 navigation-outlet nav {
   padding-bottom: 1rem;
   display: flex;
@@ -181,17 +165,16 @@ navigation-outlet nav {
   float: right;
 }
 
-@keyframes move-from-right {
+@keyframes move-from-bottom {
   from {
-    transform: translateX(100%);
+    transform: translateY(100%);
   }
 }
-@keyframes move-to-right {
+@keyframes move-to-bottom {
   to {
-    transform: translateX(100%);
+    transform: translateY(100%);
   }
 }
-
 .slide-in {
   animation: move-from-bottom 0.4s ease both;
 }
@@ -209,11 +192,9 @@ navigation-outlet nav {
 }
 
 .train-marker {
-  margin: 0 !important;
   margin-top: -0.75rem !important;
   margin-left: -0.75rem !important;
 }
-
 .train-marker div {
   padding: 0;
   background: #1a2122;
@@ -226,7 +207,6 @@ navigation-outlet nav {
   justify-content: center;
   box-shadow: 0 0 5px #000;
 }
-
 .train-marker img {
   width: 1.125em;
   height: 1.125rem;
@@ -258,25 +238,6 @@ navigation-outlet nav {
   z-index: 2;
   display: none;
 }
-
-.popup-div div {
-  margin-bottom: 1rem;
-}
-
-.popup-div div:last-child {
-  margin-bottom: 0;
-}
-
-.popup-div h2,
-.popup-div h3 {
-  padding: 0;
-}
-
-.popup-div p {
-  color: #ccc;
-  padding: 0;
-}
-
 .popup-div .close {
   background-color: #303030;
   color: #f5f5f5;
@@ -286,6 +247,20 @@ navigation-outlet nav {
   border-radius: 50%;
   float: right;
   font-size: 1.6rem;
+}
+.popup-div div {
+  margin-bottom: 1rem;
+}
+.popup-div div:last-child {
+  margin-bottom: 0;
+}
+.popup-div h2,
+.popup-div h3 {
+  padding: 0;
+}
+.popup-div p {
+  color: #ccc;
+  padding: 0;
 }
 
 .saved-stations {
@@ -309,11 +284,11 @@ navigation-outlet nav {
   flex-direction: column;
   justify-content: center;
 }
-
 .station-info h3 {
   padding-bottom: 0;
 }
-
 .station-info span {
   color: #ccc;
 }
+
+/*# sourceMappingURL=style.css.map */

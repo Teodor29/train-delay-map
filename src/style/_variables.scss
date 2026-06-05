@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+$font-family: 'Inter', sans-serif;
+$font-weight: 500;
+
+$primary-text-color: #f5f5f5;
+$secondary-text-color: #ccc;
+$accent-text-color: #9fefff;
+$black: #000;
+$white: #fff;
+
+$accent-light: #58b9ca;
+$accent: #496276;
+$accent-dark: #00363e;
+$accent-darker: rgb(0, 36, 41);
+
+$bg-color: #131314;
+$bg-color2: #1a2122;
+$bg-color3: #303030;
+
+$red-color: #b20d0d;
+$bg-red: rgb(114, 36, 36);
+$bg-red2: rgb(88, 28, 28);
+$error-color: rgb(230, 87, 87);
+$link-color: $accent-text-color;
+$border-color: $bg-color3;

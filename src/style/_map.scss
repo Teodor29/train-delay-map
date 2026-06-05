@@ -1,0 +1,90 @@
+@use 'variables' as *;
+
+.map {
+  position: fixed;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 0;
+}
+
+.train-marker {
+  margin-top: -0.75rem !important;
+  margin-left: -0.75rem !important;
+
+  div {
+    padding: 0;
+    background: $bg-color2;
+    border: 2px solid $primary-text-color;
+    border-radius: 40%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px $black;
+  }
+
+  img {
+    width: 1.125em;
+    height: 1.125rem;
+  }
+}
+
+.delayed {
+  div {
+    background: $red-color;
+  }
+}
+
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+.popup-div {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  min-height: 150px;
+  background: $bg-color;
+  color: $primary-text-color;
+  border-radius: 1rem 1rem 0 0;
+  padding: 1rem;
+  z-index: 2;
+  display: none;
+
+  .close {
+    background-color: $bg-color3;
+    color: $primary-text-color;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 50%;
+    float: right;
+    font-size: 1.6rem;
+  }
+
+  div {
+    margin-bottom: 1rem;
+  }
+
+  div:last-child {
+    margin-bottom: 0;
+  }
+
+  h2,
+  h3 {
+    padding: 0;
+  }
+
+  p {
+    color: $secondary-text-color;
+    padding: 0;
+  }
+}

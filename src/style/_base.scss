@@ -1,0 +1,190 @@
+@use 'variables' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: $bg-color;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  line-height: 1.4;
+  font-family: $font-family;
+  font-weight: $font-weight;
+  color: $primary-text-color;
+}
+
+a {
+  color: $link-color;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  padding-bottom: 0.5rem;
+}
+
+ul {
+  list-style: none;
+  color: $primary-text-color;
+}
+
+button,
+.button {
+  display: inline-block;
+  color: $primary-text-color;
+  background-color: $accent-dark;
+  text-decoration: none;
+  border: 0;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+  }
+
+  &:hover {
+    background-color: $accent-darker;
+  }
+}
+
+.bg-red {
+  background-color: $bg-red;
+
+  &:hover {
+    background-color: $bg-red2;
+  }
+}
+
+.btn-big {
+  width: 100%;
+  font-size: 1.125rem;
+  padding: 0.75rem 1.5rem;
+}
+
+label,
+input,
+textarea,
+select {
+  display: block;
+  font-size: 1.125rem;
+}
+
+input,
+textarea,
+select {
+  background-color: $bg-color2;
+  color: $primary-text-color;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: $border-color 1px solid;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.route-container {
+  max-width: 25rem;
+  margin: 0 auto;
+}
+
+router-outlet {
+  display: flex;
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
+  margin: 0 auto;
+}
+
+router-outlet > * {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-links {
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  color: $secondary-text-color;
+  text-decoration: none;
+}
+
+.nav-links img {
+  width: 1.5rem;
+}
+
+navigation-outlet {
+  z-index: 1;
+  background-color: $bg-color2;
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  nav {
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.flashmessage {
+  color: $error-color;
+  padding: 0.5rem;
+}
+
+.right {
+  float: right;
+}
+
+@keyframes move-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes move-to-bottom {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.slide-in {
+  animation: move-from-bottom 0.4s ease both;
+}
+
+.slide-out {
+  animation: move-to-bottom 0.4s ease both;
+}
