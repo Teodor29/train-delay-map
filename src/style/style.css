@@ -149,10 +149,6 @@ navigation-outlet {
   background-color: #1a2122;
 }
 
-navigation-outlet a:hover {
-  text-decoration: underline;
-}
-
 navigation-outlet nav {
   padding-bottom: 1rem;
   display: flex;
@@ -285,7 +281,7 @@ navigation-outlet nav {
   padding: 1rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   border-bottom: 2px solid #303030;
 }
 
@@ -299,7 +295,8 @@ navigation-outlet nav {
   justify-content: center;
 }
 
-.station-info h3 {
+.station-info h2 {
+  font-size: 1.25rem;
   padding-bottom: 0;
 }
 

@@ -146,10 +146,6 @@ navigation-outlet {
   z-index: 1;
   background-color: $bg-color2;
 
-  a:hover {
-    text-decoration: underline;
-  }
-
   nav {
     padding-bottom: 1rem;
     display: flex;
