@@ -237,6 +237,8 @@ export default class Map extends HTMLElement {
   }
 
   createStationPopupContent(station) {
+    let delayMessage = ''
+    let estimatedMessage = ''
     let estimatedTime = ''
     let button = `<button id="save-station">
                 <img src="assets/img/saved.svg" alt="Spara">
@@ -260,18 +262,20 @@ export default class Map extends HTMLElement {
       let estimated = new Date(station.delay.EstimatedTimeAtLocation)
       this.delay = Math.round((estimated - advertised) / 60000)
 
+      delayMessage = `Försenad: ${this.delay} min`
       estimatedTime = `${estimated.toLocaleTimeString('sv-SE', {
         hour: '2-digit',
         minute: '2-digit',
       })}`
+      estimatedMessage = `Beräknad ankomst: ${estimatedTime}`
     }
 
     return `
             <button class="close" id="close-popup">&times;</button>
             <div>
                 <h2>${station.AdvertisedLocationName}</h2>
-                <p>Försenad: ${this.delay} minuter</p>
-                <p>Beräknad ankomst: ${estimatedTime}</p>
+                <p>${delayMessage}</p>
+                <p>${estimatedMessage}</p>
             </div>
             <div>
                 ${button}

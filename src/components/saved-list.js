@@ -20,7 +20,7 @@ export default class SavedList extends HTMLElement {
           let advertised = new Date(station.delay.AdvertisedTimeAtLocation)
           let estimated = new Date(station.delay.EstimatedTimeAtLocation)
           let delay = (estimated - advertised) / 60000
-          delayMessage = `Försenad: ${delay} minuter`
+          delayMessage = `Försenad: ${delay} min`
         }
 
         return `<div class="station">
