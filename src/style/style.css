@@ -93,7 +93,7 @@ select {
   color: oklch(97% 0.01 225.8deg);
   margin-bottom: 1rem;
   padding: 1rem;
-  border: oklch(20% 0.01 225.8deg) 1px solid;
+  border: oklch(30% 0.01 225.8deg) 1px solid;
   border-radius: 5px;
   width: 100%;
 }
@@ -148,7 +148,7 @@ navigation-outlet {
   display: flex;
   align-items: center;
   background-color: oklch(15% 0.01 225.8deg);
-  border-top: 1px solid oklch(20% 0.01 225.8deg);
+  border-top: 1px solid oklch(30% 0.01 225.8deg);
 }
 navigation-outlet nav {
   width: 100%;
@@ -244,7 +244,7 @@ navigation-outlet nav {
   display: none;
 }
 .popup-div .close {
-  background-color: oklch(20% 0.01 225.8deg);
+  background-color: oklch(30% 0.01 225.8deg);
   color: oklch(97% 0.01 225.8deg);
   width: 2rem;
   height: 2rem;
@@ -277,7 +277,7 @@ navigation-outlet nav {
   display: flex;
   align-items: center;
   gap: 1rem;
-  border-bottom: 2px solid oklch(20% 0.01 225.8deg);
+  border-bottom: 2px solid oklch(30% 0.01 225.8deg);
 }
 
 .station .train-marker {
