@@ -46,16 +46,13 @@
 
 .popup-div {
   position: fixed;
-  left: 50%;
   bottom: $navbar-height;
-  transform: translateX(-50%);
   width: 100%;
   max-width: 500px;
   background: $background-color;
   color: $text-color;
   border-radius: 1rem 1rem 0 0;
   padding: 1rem;
-  z-index: 2;
   display: none;
 
   .close {

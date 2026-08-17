@@ -231,16 +231,13 @@ navigation-outlet nav {
 
 .popup-div {
   position: fixed;
-  left: 50%;
   bottom: 5rem;
-  transform: translateX(-50%);
   width: 100%;
   max-width: 500px;
   background: oklch(15% 0.01 225.8deg);
   color: oklch(97% 0.01 225.8deg);
   border-radius: 1rem 1rem 0 0;
   padding: 1rem;
-  z-index: 2;
   display: none;
 }
 .popup-div .close {
