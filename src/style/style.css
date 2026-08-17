@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@
 
 html,
 body {
-  background-color: #131314;
+  background-color: oklch(15% 0.01 207.04deg);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -19,13 +19,13 @@ html {
 
 body {
   line-height: 1.4;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
-  color: #f5f5f5;
+  color: oklch(97% 0 0deg);
 }
 
 a {
-  color: #9fefff;
+  color: oklch(90.6% 0.081 211.56deg);
 }
 
 h1,
@@ -38,14 +38,14 @@ ul {
 
 ul {
   list-style: none;
-  color: #f5f5f5;
+  color: oklch(97% 0 0deg);
 }
 
 button,
 .button {
   display: inline-block;
-  color: #f5f5f5;
-  background-color: #00363e;
+  color: oklch(97% 0 0deg);
+  background-color: oklch(30.5% 0.053 210.66deg);
   text-decoration: none;
   border: 0;
   font-size: 1rem;
@@ -62,14 +62,14 @@ button img,
 }
 button:hover,
 .button:hover {
-  background-color: rgb(0, 36, 41);
+  background-color: oklch(23.8% 0.041 208.36deg);
 }
 
 .bg-red {
-  background-color: rgb(114, 36, 36);
+  background-color: oklch(38.1% 0.11 23.97deg);
 }
 .bg-red:hover {
-  background-color: rgb(88, 28, 28);
+  background-color: oklch(32.1% 0.089 23.56deg);
 }
 
 .btn-big {
@@ -89,11 +89,11 @@ select {
 input,
 textarea,
 select {
-  background-color: #1a2122;
-  color: #f5f5f5;
+  background-color: oklch(20.1% 0.01 207.04deg);
+  color: oklch(97% 0 0deg);
   margin-bottom: 1rem;
   padding: 1rem;
-  border: #303030 1px solid;
+  border: oklch(30.9% 0 0deg) 1px solid;
   border-radius: 5px;
   width: 100%;
 }
@@ -103,7 +103,7 @@ select {
 }
 
 .route-container {
-  max-width: 25rem;
+  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -124,6 +124,8 @@ router-outlet > * {
 .nav-links {
   padding: 0;
   display: flex;
+  max-width: 500px;
+  margin: 0 auto;
   justify-content: space-around;
 }
 
@@ -132,7 +134,7 @@ router-outlet > * {
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  color: #ccc;
+  color: oklch(84.5% 0 0deg);
   text-decoration: none;
 }
 
@@ -142,7 +144,7 @@ router-outlet > * {
 
 navigation-outlet {
   z-index: 1;
-  background-color: #1a2122;
+  background-color: oklch(15% 0.01 207.04deg);
 }
 navigation-outlet nav {
   padding-bottom: 1rem;
@@ -158,7 +160,7 @@ navigation-outlet nav {
 }
 
 .flashmessage {
-  color: rgb(230, 87, 87);
+  color: oklch(64.6% 0.178 23.52deg);
   padding: 0.5rem;
 }
 
@@ -198,15 +200,15 @@ navigation-outlet nav {
 }
 .train-marker div {
   padding: 0;
-  background: #1a2122;
-  border: 2px solid #f5f5f5;
+  background: oklch(20.1% 0.01 207.04deg);
+  border: 2px solid oklch(97% 0 0deg);
   border-radius: 40%;
   width: 1.5rem;
   height: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 5px #000;
+  box-shadow: 0 0 5px oklch(0% 0 0deg);
 }
 .train-marker img {
   width: 1.125em;
@@ -214,7 +216,7 @@ navigation-outlet nav {
 }
 
 .delayed div {
-  background: #b20d0d;
+  background: oklch(48.4% 0.192 28.53deg);
 }
 
 .leaflet-layer,
@@ -230,17 +232,17 @@ navigation-outlet nav {
   bottom: 0;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 600px;
-  background: #131314;
-  color: #f5f5f5;
+  max-width: 500px;
+  background: oklch(15% 0.01 207.04deg);
+  color: oklch(97% 0 0deg);
   border-radius: 1rem 1rem 0 0;
   padding: 1rem;
   z-index: 2;
   display: none;
 }
 .popup-div .close {
-  background-color: #303030;
-  color: #f5f5f5;
+  background-color: oklch(30.9% 0 0deg);
+  color: oklch(97% 0 0deg);
   width: 2rem;
   height: 2rem;
   padding: 0;
@@ -259,7 +261,7 @@ navigation-outlet nav {
   padding: 0;
 }
 .popup-div p {
-  color: #ccc;
+  color: oklch(84.5% 0 0deg);
   padding: 0;
 }
 
@@ -272,7 +274,7 @@ navigation-outlet nav {
   display: flex;
   align-items: center;
   gap: 1rem;
-  border-bottom: 2px solid #303030;
+  border-bottom: 2px solid oklch(30.9% 0 0deg);
 }
 
 .station .train-marker {
@@ -289,7 +291,7 @@ navigation-outlet nav {
   padding-bottom: 0;
 }
 .station-info span {
-  color: #ccc;
+  color: oklch(84.5% 0 0deg);
 }
 
 /*# sourceMappingURL=style.css.map */

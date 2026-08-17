@@ -105,7 +105,7 @@ select {
 }
 
 .route-container {
-  max-width: 25rem;
+  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -126,6 +126,8 @@ router-outlet > * {
 .nav-links {
   padding: 0;
   display: flex;
+  max-width: 500px;
+  margin: 0 auto;
   justify-content: space-around;
 }
 
@@ -144,7 +146,7 @@ router-outlet > * {
 
 navigation-outlet {
   z-index: 1;
-  background-color: $bg-color2;
+  background-color: $bg-color;
 
   nav {
     padding-bottom: 1rem;

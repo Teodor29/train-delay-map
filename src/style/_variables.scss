@@ -3,24 +3,24 @@
 $font-family: 'Inter', sans-serif;
 $font-weight: 500;
 
-$primary-text-color: #f5f5f5;
-$secondary-text-color: #ccc;
-$accent-text-color: #9fefff;
-$black: #000;
-$white: #fff;
+$primary-text-color: oklch(97% 0 0);
+$secondary-text-color: oklch(84.5% 0 0);
+$accent-text-color: oklch(90.6% 0.081 211.56);
+$black: oklch(0% 0 0);
+$white: oklch(100% 0 0);
 
-$accent-light: #58b9ca;
-$accent: #496276;
-$accent-dark: #00363e;
-$accent-darker: rgb(0, 36, 41);
+$accent-light: oklch(73.4% 0.094 210.56);
+$accent: oklch(48.4% 0.044 242.92);
+$accent-dark: oklch(30.5% 0.053 210.66);
+$accent-darker: oklch(23.8% 0.041 208.36);
 
-$bg-color: #131314;
-$bg-color2: #1a2122;
-$bg-color3: #303030;
+$bg-color: oklch(15% 0.01 207.04);
+$bg-color2: oklch(20.1% 0.01 207.04);
+$bg-color3: oklch(30.9% 0 0);
 
-$red-color: #b20d0d;
-$bg-red: rgb(114, 36, 36);
-$bg-red2: rgb(88, 28, 28);
-$error-color: rgb(230, 87, 87);
+$red-color: oklch(48.4% 0.192 28.53);
+$bg-red: oklch(38.1% 0.11 23.97);
+$bg-red2: oklch(32.1% 0.089 23.56);
+$error-color: oklch(64.6% 0.178 23.52);
 $link-color: $accent-text-color;
 $border-color: $bg-color3;
