@@ -1,12 +1,18 @@
 export default class SavedView extends HTMLElement {
   connectedCallback() {
+    const savedStations =
+      JSON.parse(localStorage.getItem('savedStations')) || []
     this.innerHTML = `
             <header class="header">
                 <lager-title title="Home"></lager-title>
             </header>
             <main class="main container">
                 <saved-list></saved-list>
-                <button class="btn-big bg-red" id="clear-fav">Rensa stationer</button>
+        ${
+          savedStations.length > 0
+            ? '<button class="btn-big bg-red" id="clear-fav">Rensa stationer</button>'
+            : '<p class="center">Inga sparade stationer</p>'
+        }
             </main>
         `
 
