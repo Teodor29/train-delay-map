@@ -135,7 +135,7 @@ router-outlet > * {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem 1rem;
   color: $text-muted-color;
   text-decoration: none;
 }
@@ -146,11 +146,14 @@ router-outlet > * {
 
 navigation-outlet {
   z-index: 1;
+  height: $navbar-height;
+  display: flex;
+  align-items: center;
   background-color: $background-color;
   border-top: 1px solid $border-color;
 
   nav {
-    padding-bottom: 1rem;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
