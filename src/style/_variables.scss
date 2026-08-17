@@ -3,24 +3,20 @@
 $font-family: 'Inter', sans-serif;
 $font-weight: 500;
 
-$primary-text-color: oklch(97% 0 0);
-$secondary-text-color: oklch(84.5% 0 0);
-$accent-text-color: oklch(90.6% 0.081 211.56);
-$black: oklch(0% 0 0);
-$white: oklch(100% 0 0);
+$text-color: oklch(0.97 0.01 225.8);
+$text-muted-color: oklch(0.85 0.01 225.8);
+$link-color: oklch(0.9 0.081 211.56);
+$black: oklch(0 0 0);
+$white: oklch(1 0 0);
 
-$accent-light: oklch(73.4% 0.094 210.56);
-$accent: oklch(48.4% 0.044 242.92);
-$accent-dark: oklch(30.5% 0.053 210.66);
-$accent-darker: oklch(23.8% 0.041 208.36);
+$primary-color: oklch(0.4 0.1556 225.8);
+$primary-color-hover: oklch(0.3 0.1556 225.8);
 
-$bg-color: oklch(15% 0.01 207.04);
-$bg-color2: oklch(20.1% 0.01 207.04);
-$bg-color3: oklch(30.9% 0 0);
+$background-color: oklch(0.15 0.01 225.8);
+$surface-color: oklch(0.2 0.01 225.8);
+$border-color: oklch(0.2 0.01 225.8);
 
-$red-color: oklch(48.4% 0.192 28.53);
-$bg-red: oklch(38.1% 0.11 23.97);
-$bg-red2: oklch(32.1% 0.089 23.56);
-$error-color: oklch(64.6% 0.178 23.52);
-$link-color: $accent-text-color;
-$border-color: $bg-color3;
+$danger-color: oklch(0.5 0.192 28.53);
+$danger-bg-color: oklch(0.4 0.11 23.97);
+$danger-bg-hover-color: oklch(0.3 0.089 23.56);
+$error-color: oklch(0.6 0.178 23.52);

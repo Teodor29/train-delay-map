@@ -7,7 +7,7 @@
 
 html,
 body {
-  background-color: oklch(15% 0.01 207.04deg);
+  background-color: oklch(15% 0.01 225.8deg);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -21,11 +21,11 @@ body {
   line-height: 1.4;
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  color: oklch(97% 0 0deg);
+  color: oklch(97% 0.01 225.8deg);
 }
 
 a {
-  color: oklch(90.6% 0.081 211.56deg);
+  color: oklch(90% 0.081 211.56deg);
 }
 
 h1,
@@ -38,14 +38,14 @@ ul {
 
 ul {
   list-style: none;
-  color: oklch(97% 0 0deg);
+  color: oklch(97% 0.01 225.8deg);
 }
 
 button,
 .button {
   display: inline-block;
-  color: oklch(97% 0 0deg);
-  background-color: oklch(30.5% 0.053 210.66deg);
+  color: oklch(97% 0.01 225.8deg);
+  background-color: oklch(40% 0.1556 225.8deg);
   text-decoration: none;
   border: 0;
   font-size: 1rem;
@@ -62,14 +62,14 @@ button img,
 }
 button:hover,
 .button:hover {
-  background-color: oklch(23.8% 0.041 208.36deg);
+  background-color: oklch(30% 0.1556 225.8deg);
 }
 
 .bg-red {
-  background-color: oklch(38.1% 0.11 23.97deg);
+  background-color: oklch(40% 0.11 23.97deg);
 }
 .bg-red:hover {
-  background-color: oklch(32.1% 0.089 23.56deg);
+  background-color: oklch(30% 0.089 23.56deg);
 }
 
 .btn-big {
@@ -89,11 +89,11 @@ select {
 input,
 textarea,
 select {
-  background-color: oklch(20.1% 0.01 207.04deg);
-  color: oklch(97% 0 0deg);
+  background-color: oklch(20% 0.01 225.8deg);
+  color: oklch(97% 0.01 225.8deg);
   margin-bottom: 1rem;
   padding: 1rem;
-  border: oklch(30.9% 0 0deg) 1px solid;
+  border: oklch(20% 0.01 225.8deg) 1px solid;
   border-radius: 5px;
   width: 100%;
 }
@@ -134,7 +134,7 @@ router-outlet > * {
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  color: oklch(84.5% 0 0deg);
+  color: oklch(85% 0.01 225.8deg);
   text-decoration: none;
 }
 
@@ -144,7 +144,8 @@ router-outlet > * {
 
 navigation-outlet {
   z-index: 1;
-  background-color: oklch(15% 0.01 207.04deg);
+  background-color: oklch(15% 0.01 225.8deg);
+  border-top: 1px solid oklch(20% 0.01 225.8deg);
 }
 navigation-outlet nav {
   padding-bottom: 1rem;
@@ -152,7 +153,6 @@ navigation-outlet nav {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 
 .center {
@@ -160,7 +160,7 @@ navigation-outlet nav {
 }
 
 .flashmessage {
-  color: oklch(64.6% 0.178 23.52deg);
+  color: oklch(60% 0.178 23.52deg);
   padding: 0.5rem;
 }
 
@@ -200,8 +200,8 @@ navigation-outlet nav {
 }
 .train-marker div {
   padding: 0;
-  background: oklch(20.1% 0.01 207.04deg);
-  border: 2px solid oklch(97% 0 0deg);
+  background: oklch(20% 0.01 225.8deg);
+  border: 2px solid oklch(97% 0.01 225.8deg);
   border-radius: 40%;
   width: 1.5rem;
   height: 1.5rem;
@@ -216,7 +216,7 @@ navigation-outlet nav {
 }
 
 .delayed div {
-  background: oklch(48.4% 0.192 28.53deg);
+  background: oklch(50% 0.192 28.53deg);
 }
 
 .leaflet-layer,
@@ -233,16 +233,17 @@ navigation-outlet nav {
   transform: translateX(-50%);
   width: 100%;
   max-width: 500px;
-  background: oklch(15% 0.01 207.04deg);
-  color: oklch(97% 0 0deg);
+  min-height: 150px;
+  background: oklch(15% 0.01 225.8deg);
+  color: oklch(97% 0.01 225.8deg);
   border-radius: 1rem 1rem 0 0;
   padding: 1rem;
   z-index: 2;
   display: none;
 }
 .popup-div .close {
-  background-color: oklch(30.9% 0 0deg);
-  color: oklch(97% 0 0deg);
+  background-color: oklch(20% 0.01 225.8deg);
+  color: oklch(97% 0.01 225.8deg);
   width: 2rem;
   height: 2rem;
   padding: 0;
@@ -261,7 +262,7 @@ navigation-outlet nav {
   padding: 0;
 }
 .popup-div p {
-  color: oklch(84.5% 0 0deg);
+  color: oklch(85% 0.01 225.8deg);
   padding: 0;
 }
 
@@ -274,7 +275,7 @@ navigation-outlet nav {
   display: flex;
   align-items: center;
   gap: 1rem;
-  border-bottom: 2px solid oklch(30.9% 0 0deg);
+  border-bottom: 2px solid oklch(20% 0.01 225.8deg);
 }
 
 .station .train-marker {
@@ -291,7 +292,7 @@ navigation-outlet nav {
   padding-bottom: 0;
 }
 .station-info span {
-  color: oklch(84.5% 0 0deg);
+  color: oklch(85% 0.01 225.8deg);
 }
 
 /*# sourceMappingURL=style.css.map */
