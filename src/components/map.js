@@ -9,7 +9,6 @@ export default class Map extends HTMLElement {
     this.map = null
     this.circle = null
     this.delay = null
-    this.delayFromNow = null
     this.socket = null
     this.stationInterval = null
   }

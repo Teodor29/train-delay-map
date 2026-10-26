@@ -2,37 +2,37 @@
     "name": "train-delay-map",
     "version": "1.0.0",
     "description": "Live map of delayed trains in Sweden.",
-    "main": "index.js",
+    "private": true,
     "scripts": {
-        "test": "echo \"Implement later\" && exit 0",
+        "test": "npm run eslint && npm run stylelint && npm run htmlhint",
         "start": "live-server --port=8080 --watch=.",
         "sass:watch": "sass --watch src/style/style.scss:src/style/style.css",
-        "posttest": "npm run eslint && npm run stylelint && npm run htmlhint",
         "eslint": "eslint",
         "eslint:fix": "eslint --fix",
         "stylelint": "stylelint \"**/*.{css,scss}\"",
-        "stylelint:fix": "stylelint --fix \"**/*.css\"",
+        "stylelint:fix": "stylelint --fix \"**/*.{css,scss}\"",
         "htmlhint": "htmlhint \"**/*.html\"",
         "format": "prettier --write \"src/**/*.{js,css,scss,html}\" \"*.html\""
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "keywords": [
+        "leaflet",
+        "socket.io",
+        "web-components",
+        "trains"
+    ],
+    "author": "Teodor Lien",
+    "license": "CC0-1.0",
     "devDependencies": {
         "@eslint/js": "^9.18.0",
         "eslint": "^9.25.1",
         "globals": "^15.14.0",
         "htmlhint": "^1.1.4",
-        "http-server": "^14.1.1",
+        "live-server": "^1.2.2",
         "postcss": "^8.5.3",
+        "prettier": "^3.9.10",
+        "sass": "^1.106.1",
         "stylelint": "^16.19.1",
         "stylelint-config-sass-guidelines": "^12.1.0",
         "stylelint-config-standard": "^37.0.0"
-    },
-    "dependencies": {
-        "live-server": "^1.2.0",
-        "prettier": "^3.8.3",
-        "sass": "^1.86.3",
-        "socket.io-client": "^4.8.1"
     }
 }

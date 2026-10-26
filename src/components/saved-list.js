@@ -1,8 +1,6 @@
 export default class SavedList extends HTMLElement {
   constructor() {
     super()
-
-    this.orders = []
   }
 
   async connectedCallback() {
