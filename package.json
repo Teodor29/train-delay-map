@@ -1,7 +1,7 @@
 {
-    "name": "webapp",
+    "name": "train-delay-map",
     "version": "1.0.0",
-    "description": "Course material for the course Webbapplikationer för mobila enheter given at Blekinge Institute of Technology.",
+    "description": "Live map of delayed trains in Sweden.",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Implement later\" && exit 0",

@@ -39,9 +39,7 @@ export default class Router extends HTMLElement {
 
   render() {
     this.innerHTML = `
-            <div class="route-container">
-                <not-found></not-found>
-            </div>
+            <div class="route-container"></div>
         `
 
     if (this.routes[this.currentRoute]) {

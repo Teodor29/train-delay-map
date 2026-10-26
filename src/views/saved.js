@@ -3,9 +3,6 @@ export default class SavedView extends HTMLElement {
     const savedStations =
       JSON.parse(localStorage.getItem('savedStations')) || []
     this.innerHTML = `
-            <header class="header">
-                <lager-title title="Home"></lager-title>
-            </header>
             <main class="main container">
                 <saved-list></saved-list>
         ${
