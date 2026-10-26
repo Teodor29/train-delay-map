@@ -2,7 +2,7 @@
 
 A mobile first web application that displays train delays on an interactive map.
 
-**Live demo:** https://teodor29.github.io/train-delay-map/
+**Live demo:** https://train-delay.vercel.app/
 
 <br>
 
