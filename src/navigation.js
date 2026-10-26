@@ -1,4 +1,4 @@
-import Router from './router.js'
+import Router from "./router.js"
 
 export default class Navigation extends HTMLElement {
   constructor() {
@@ -11,7 +11,7 @@ export default class Navigation extends HTMLElement {
   connectedCallback() {
     const routes = this.router.routes
 
-    let navigationLinks = ''
+    let navigationLinks = ""
 
     for (let path in routes) {
       navigationLinks += `<a href='#${path}'>

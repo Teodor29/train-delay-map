@@ -6,7 +6,7 @@ export default class SavedList extends HTMLElement {
   }
 
   async connectedCallback() {
-    this.savedStations = JSON.parse(localStorage.getItem('savedStations')) || []
+    this.savedStations = JSON.parse(localStorage.getItem("savedStations")) || []
 
     this.render()
   }
@@ -14,7 +14,7 @@ export default class SavedList extends HTMLElement {
   render() {
     const list = this.savedStations
       .map((station) => {
-        let delayMessage = ''
+        let delayMessage = ""
 
         if (station.delay) {
           let advertised = new Date(station.delay.AdvertisedTimeAtLocation)
@@ -35,7 +35,7 @@ export default class SavedList extends HTMLElement {
                         </div>
                     </div>`
       })
-      .join('')
+      .join("")
 
     this.innerHTML = `
           <div class="saved-stations">

@@ -1,7 +1,7 @@
 export default class SavedView extends HTMLElement {
   connectedCallback() {
     const savedStations =
-      JSON.parse(localStorage.getItem('savedStations')) || []
+      JSON.parse(localStorage.getItem("savedStations")) || []
     this.innerHTML = `
             <main class="main container">
                 <saved-list></saved-list>
@@ -13,11 +13,11 @@ export default class SavedView extends HTMLElement {
             </main>
         `
 
-    document.getElementById('clear-fav')?.addEventListener('click', () => {
+    document.getElementById("clear-fav")?.addEventListener("click", () => {
       if (
-        confirm('Är du säker på att du vill ta bort alla sparade stationer?')
+        confirm("Är du säker på att du vill ta bort alla sparade stationer?")
       ) {
-        localStorage.removeItem('savedStations')
+        localStorage.removeItem("savedStations")
         window.location.reload()
       }
     })

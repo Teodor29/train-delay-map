@@ -2,18 +2,18 @@ export default class Router extends HTMLElement {
   constructor() {
     super()
 
-    this.currentRoute = ''
+    this.currentRoute = ""
 
     this.allRoutes = {
-      '': {
-        view: '<map-view></map-view>',
-        name: 'Karta',
-        icon: 'map',
+      "": {
+        view: "<map-view></map-view>",
+        name: "Karta",
+        icon: "map",
       },
       saved: {
-        view: '<saved-view></saved-view>',
-        name: 'Sparade',
-        icon: 'saved',
+        view: "<saved-view></saved-view>",
+        name: "Sparade",
+        icon: "saved",
       },
     }
   }
@@ -24,7 +24,7 @@ export default class Router extends HTMLElement {
 
   // connect component
   connectedCallback() {
-    window.addEventListener('hashchange', () => {
+    window.addEventListener("hashchange", () => {
       this.resolveRoute()
     })
 
@@ -32,7 +32,7 @@ export default class Router extends HTMLElement {
   }
 
   resolveRoute() {
-    this.currentRoute = location.hash.replace('#', '').split('/')[0]
+    this.currentRoute = location.hash.replace("#", "").split("/")[0]
 
     this.render()
   }

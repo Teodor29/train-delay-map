@@ -1,5 +1,5 @@
 /* global L, io */
-import { baseURL } from '../utils.js'
+import { baseURL } from "../utils.js"
 
 export default class Map extends HTMLElement {
   constructor() {
@@ -15,9 +15,9 @@ export default class Map extends HTMLElement {
   }
 
   async connectedCallback() {
-    this.socket = io('https://trafik.emilfolino.se')
+    this.socket = io("https://trafik.emilfolino.se")
 
-    this.socket.on('position', (data) => {
+    this.socket.on("position", (data) => {
       if (data) {
         this.renderDelayedTrainMarkers(data)
       }
@@ -51,19 +51,19 @@ export default class Map extends HTMLElement {
   }
 
   async renderMap() {
-    this.map = L.map('map').setView([59.274793160440225, 17.85712622996837], 10)
+    this.map = L.map("map").setView([59.274793160440225, 17.85712622996837], 10)
 
-    this.map.on('click', () => {
-      const popup = document.getElementById('popup-div')
+    this.map.on("click", () => {
+      const popup = document.getElementById("popup-div")
       if (popup) {
-        popup.style.display = 'none'
+        popup.style.display = "none"
       }
       if (this.circle) {
         this.map.removeLayer(this.circle)
       }
     })
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -93,20 +93,20 @@ export default class Map extends HTMLElement {
       const lat = train.position[0]
       const lon = train.position[1]
       L.marker([lat, lon], {
-        color: 'red',
+        color: "red",
       })
-        .on('click', () => {
+        .on("click", () => {
           this.map.setView([lat, lon])
 
-          const popup = document.getElementById('popup-div')
+          const popup = document.getElementById("popup-div")
           popup.innerHTML = `
                     <button class="close" id="close-popup">&times;</button>
                     <h3>Tåg nr: ${train.train}</h3>
                     <span>Försenad</span>
                 `
-          popup.style.display = 'block'
-          document.getElementById('close-popup').onclick = () => {
-            popup.style.display = 'none'
+          popup.style.display = "block"
+          document.getElementById("close-popup").onclick = () => {
+            popup.style.display = "none"
           }
         })
         .addTo(this.delayedMarkersLayer)
@@ -163,40 +163,40 @@ export default class Map extends HTMLElement {
 
     stations.forEach((station) => {
       if (station.delay) {
-        trainIcon.options.className = 'train-marker delayed'
+        trainIcon.options.className = "train-marker delayed"
       } else {
-        trainIcon.options.className = 'train-marker'
+        trainIcon.options.className = "train-marker"
       }
 
       const pointString = station.Geometry.WGS84
       const coords = pointString
-        .replace('POINT (', '')
-        .replace(')', '')
-        .split(' ')
+        .replace("POINT (", "")
+        .replace(")", "")
+        .split(" ")
       const lat = parseFloat(coords[1])
       const lon = parseFloat(coords[0])
 
       const marker = L.marker([lat, lon], {
         icon: trainIcon,
-      }).on('click', () => {
+      }).on("click", () => {
         this.map.setView([lat, lon])
 
         if (this.circle) {
           this.map.removeLayer(this.circle)
         }
 
-        const popup = document.getElementById('popup-div')
+        const popup = document.getElementById("popup-div")
         popup.innerHTML = this.createStationPopupContent(station)
 
-        popup.style.display = 'block'
-        document.getElementById('close-popup').onclick = () => {
-          popup.style.display = 'none'
+        popup.style.display = "block"
+        document.getElementById("close-popup").onclick = () => {
+          popup.style.display = "none"
           if (this.circle) {
             this.map.removeLayer(this.circle)
           }
         }
 
-        const saveBtn = document.getElementById('save-station')
+        const saveBtn = document.getElementById("save-station")
         if (saveBtn) {
           saveBtn.onclick = () => {
             this.addStation(station)
@@ -216,13 +216,13 @@ export default class Map extends HTMLElement {
 
   renderLocation() {
     let locationMarker = L.icon({
-      iconUrl: 'assets/img/location.png',
+      iconUrl: "assets/img/location.png",
       iconSize: [24, 24],
       iconAnchor: [12, 12],
       popupAnchor: [0, 0],
     })
 
-    if ('geolocation' in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         if (!this.map) return
         const { latitude, longitude } = position.coords
@@ -236,26 +236,26 @@ export default class Map extends HTMLElement {
   }
 
   addStation(station) {
-    let savedStations = JSON.parse(localStorage.getItem('savedStations')) || []
+    let savedStations = JSON.parse(localStorage.getItem("savedStations")) || []
     if (
       !savedStations.find(
         (s) => s.LocationSignature === station.LocationSignature,
       )
     ) {
       savedStations.push(station)
-      localStorage.setItem('savedStations', JSON.stringify(savedStations))
+      localStorage.setItem("savedStations", JSON.stringify(savedStations))
     }
   }
 
   createStationPopupContent(station) {
-    let delayMessage = ''
-    let estimatedMessage = ''
-    let estimatedTime = ''
+    let delayMessage = ""
+    let estimatedMessage = ""
+    let estimatedTime = ""
     let button = `<button id="save-station">
                 <img src="assets/img/saved.svg" alt="Spara">
                 Spara
             </button>`
-    let savedStations = JSON.parse(localStorage.getItem('savedStations')) || []
+    let savedStations = JSON.parse(localStorage.getItem("savedStations")) || []
 
     if (
       savedStations.find(
@@ -274,9 +274,9 @@ export default class Map extends HTMLElement {
       this.delay = Math.round((estimated - advertised) / 60000)
 
       delayMessage = `Försenad: ${this.delay} min`
-      estimatedTime = `${estimated.toLocaleTimeString('sv-SE', {
-        hour: '2-digit',
-        minute: '2-digit',
+      estimatedTime = `${estimated.toLocaleTimeString("sv-SE", {
+        hour: "2-digit",
+        minute: "2-digit",
       })}`
       estimatedMessage = `Beräknad ankomst: ${estimatedTime}`
     }
