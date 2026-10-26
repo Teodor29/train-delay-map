@@ -10,12 +10,14 @@ export default class Map extends HTMLElement {
     this.circle = null
     this.delay = null
     this.delayFromNow = null
+    this.socket = null
+    this.stationInterval = null
   }
 
   async connectedCallback() {
-    const socket = io('https://trafik.emilfolino.se')
+    this.socket = io('https://trafik.emilfolino.se')
 
-    socket.on('position', (data) => {
+    this.socket.on('position', (data) => {
       if (data) {
         this.renderDelayedTrainMarkers(data)
       }
@@ -25,50 +27,53 @@ export default class Map extends HTMLElement {
 
     this.renderMap()
 
-    setInterval(async () => {
+    this.stationInterval = setInterval(async () => {
       await this.renderStationMarkers()
     }, 15000)
   }
 
+  disconnectedCallback() {
+    if (this.socket) {
+      this.socket.disconnect()
+      this.socket = null
+    }
+
+    clearInterval(this.stationInterval)
+    this.stationInterval = null
+
+    if (this.map) {
+      this.map.remove()
+      this.map = null
+    }
+
+    this.delayedMarkersLayer = null
+    this.stationMarkersLayer = null
+  }
+
   async renderMap() {
-    const initMap = async (lat, lon, zoom) => {
-      this.map = L.map('map').setView([lat, lon], zoom)
+    this.map = L.map('map').setView([59.274793160440225, 17.85712622996837], 10)
 
-      this.map.on('click', () => {
-        const popup = document.getElementById('popup-div')
-        if (popup) {
-          popup.style.display = 'none'
-        }
-        if (this.circle) {
-          this.map.removeLayer(this.circle)
-        }
-      })
+    this.map.on('click', () => {
+      const popup = document.getElementById('popup-div')
+      if (popup) {
+        popup.style.display = 'none'
+      }
+      if (this.circle) {
+        this.map.removeLayer(this.circle)
+      }
+    })
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }).addTo(this.map)
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(this.map)
 
-      this.delayedMarkersLayer = L.layerGroup().addTo(this.map)
-      this.stationMarkersLayer = L.layerGroup().addTo(this.map)
+    this.delayedMarkersLayer = L.layerGroup().addTo(this.map)
+    this.stationMarkersLayer = L.layerGroup().addTo(this.map)
 
-      await this.renderStationMarkers()
-      this.renderLocation()
-    }
-
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          initMap(position.coords.latitude, position.coords.longitude, 11)
-        },
-        () => {
-          initMap(59.274793160440225, 17.85712622996837, 10)
-        },
-      )
-    } else {
-      initMap(59.274793160440225, 17.85712622996837, 10)
-    }
+    this.renderLocation()
+    await this.renderStationMarkers()
   }
 
   async renderDelayedTrainMarkers(data) {
@@ -135,6 +140,8 @@ export default class Map extends HTMLElement {
     if (!Array.isArray(stationsData) || !Array.isArray(delayedData)) {
       return
     }
+
+    if (!this.stationMarkersLayer) return
 
     this.stationMarkersLayer.clearLayers()
 
@@ -217,7 +224,11 @@ export default class Map extends HTMLElement {
 
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        L.marker([position.coords.latitude, position.coords.longitude], {
+        if (!this.map) return
+        const { latitude, longitude } = position.coords
+        this.map.setView([latitude, longitude], 11)
+
+        L.marker([latitude, longitude], {
           icon: locationMarker,
         }).addTo(this.map)
       })

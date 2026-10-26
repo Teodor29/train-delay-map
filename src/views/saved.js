@@ -13,7 +13,7 @@ export default class SavedView extends HTMLElement {
             </main>
         `
 
-    document.getElementById('clear-fav').addEventListener('click', () => {
+    document.getElementById('clear-fav')?.addEventListener('click', () => {
       if (
         confirm('Är du säker på att du vill ta bort alla sparade stationer?')
       ) {
